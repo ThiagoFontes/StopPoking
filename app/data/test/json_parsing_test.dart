@@ -12,13 +12,13 @@ void main() {
     "name": "butterfree"
     }""";
 
-      expect(Pokemon.fromJsonMap(json.jsonDecode(jsonStr)).name, "butterfree");
+      expect(Pokemon.fromJson(json.jsonDecode(jsonStr)).name, "butterfree");
     });
 
     test("Parses another pokemon", () async {
       final File file = new File('test/mock/charmander.json');
       final String jsonStr = await file.readAsString();
-      Pokemon charmander = Pokemon.fromJsonMap(json.jsonDecode(jsonStr));
+      Pokemon charmander = Pokemon.fromJson(json.jsonDecode(jsonStr));
       expect(charmander.name, "charmander");
       expect(charmander.types.first.type.name, "fire");
     });
