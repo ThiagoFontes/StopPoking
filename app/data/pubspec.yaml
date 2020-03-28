@@ -7,7 +7,15 @@ environment:
   sdk: ">=2.1.0 <3.0.0"
 
 dependencies:
+  # Provides immutable objects and serialization
+  built_value: ^7.0.9
 
 dev_dependencies:
+  # Provides testing framework
   test: ^1.14.2
-  test_core: ^0.3.3
+
+  # Provides code gen 
+  build_runner: ^1.8.0
+
+  # Provides immutable objects and serialization code generation
+  built_value_generator: ^7.0.9
