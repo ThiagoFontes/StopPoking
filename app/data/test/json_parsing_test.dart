@@ -17,7 +17,9 @@ void main() {
     test("Parses another pokemon", () async {
       final File file = new File('test/mock/charmander.json');
       final String jsonStr = await file.readAsString();
-      expect(parsePokemon(jsonStr).name, "charmander");
+      Pokemon charmander = parsePokemon(jsonStr);
+      expect(charmander.name, "charmander");
+      expect(charmander.types.first.type.name, "fire");
     });
   });
 }
