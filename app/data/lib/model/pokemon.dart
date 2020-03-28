@@ -11,6 +11,7 @@ class Pokemon {
   int id;
   String name;
   int weight;
+  int height;
   List<Types> types;
   List<MoveItem> moves;
 

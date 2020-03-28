@@ -22,6 +22,7 @@ void main() {
       expect(charmander.name, "charmander");
       expect(charmander.types.first.type.name, "fire");
       expect(charmander.moves[2].move.name, "thunder-punch");
+      expect(charmander.height, 6);
     });
   });
 }
