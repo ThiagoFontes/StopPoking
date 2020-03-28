@@ -8,19 +8,19 @@ part of 'pokemon.dart';
 
 Pokemon _$PokemonFromJson(Map<String, dynamic> json) {
   return Pokemon(
-    json['id'] as int,
-    json['name'] as String,
-  )
-    ..weight = json['weight'] as int
-    ..height = json['height'] as int
-    ..types = (json['types'] as List)
+    id: json['id'] as int,
+    name: json['name'] as String,
+    weight: json['weight'] as int,
+    height: json['height'] as int,
+    types: (json['types'] as List)
         ?.map(
             (e) => e == null ? null : Types.fromJson(e as Map<String, dynamic>))
-        ?.toList()
-    ..moves = (json['moves'] as List)
+        ?.toList(),
+    moves: (json['moves'] as List)
         ?.map((e) =>
             e == null ? null : MoveItem.fromJson(e as Map<String, dynamic>))
-        ?.toList();
+        ?.toList(),
+  );
 }
 
 Map<String, dynamic> _$PokemonToJson(Pokemon instance) => <String, dynamic>{
