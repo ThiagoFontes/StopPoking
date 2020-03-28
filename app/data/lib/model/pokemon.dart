@@ -18,7 +18,6 @@ abstract class Pokemon implements Built<Pokemon, PokemonBuilder> {
   @nullable
   int get height;
 
-  @BuiltValueField(wireName: 'types')
   BuiltList<TypeItem> get types;
 
   Pokemon._();

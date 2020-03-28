@@ -1,6 +1,7 @@
 import 'dart:io';
 
-import 'package:data/model/pokemon.dart';
+import 'package:data/entity/pokemon.dart';
+import 'dart:convert' as json;
 import 'package:test/test.dart';
 
 void main() {
@@ -11,13 +12,13 @@ void main() {
     "name": "butterfree"
     }""";
 
-      expect(parsePokemon(jsonStr).name, "butterfree");
+      expect(Pokemon.fromJsonMap(json.jsonDecode(jsonStr)).name, "butterfree");
     });
 
     test("Parses another pokemon", () async {
       final File file = new File('test/mock/charmander.json');
       final String jsonStr = await file.readAsString();
-      Pokemon charmander = parsePokemon(jsonStr);
+      Pokemon charmander = Pokemon.fromJsonMap(json.jsonDecode(jsonStr));
       expect(charmander.name, "charmander");
       expect(charmander.types.first.type.name, "fire");
     });
