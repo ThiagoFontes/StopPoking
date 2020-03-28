@@ -1,4 +1,4 @@
-import 'package:data/entity/move.dart';
+import 'package:data/model/move.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'moveitem.g.dart';

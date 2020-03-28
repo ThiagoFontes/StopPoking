@@ -1,8 +1,6 @@
-import 'package:data/entity/moveitem.dart';
-import 'package:data/entity/types.dart';
+import 'package:data/model/moveitem.dart';
+import 'package:data/model/types.dart';
 import 'package:json_annotation/json_annotation.dart';
-
-import 'move.dart';
 
 part 'pokemon.g.dart';
 

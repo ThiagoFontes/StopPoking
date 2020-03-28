@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:data/entity/pokemon.dart';
+import 'package:data/model/pokemon.dart';
 import 'dart:convert' as json;
 import 'package:test/test.dart';
 
