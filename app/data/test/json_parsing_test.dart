@@ -1,13 +1,23 @@
+import 'dart:io';
+
 import 'package:data/model/pokemon.dart';
 import 'package:test/test.dart';
 
 void main() {
-  test("Parses a json pokemon", () {
-    const jsonStr = """{
+  group("Pokemons Parsing", () {
+    test("Parses a json pokemon", () {
+      const jsonStr = """{
     "id": 12,
     "name": "butterfree"
     }""";
 
-    expect(parsePokemon(jsonStr).name, "butterfree");
+      expect(parsePokemon(jsonStr).name, "butterfree");
+    });
+
+    test("Parses another pokemon", () async {
+      final File file = new File('test/mock/charmander.json');
+      final String jsonStr = await file.readAsString();
+      expect(parsePokemon(jsonStr).name, "charmander");
+    });
   });
 }
