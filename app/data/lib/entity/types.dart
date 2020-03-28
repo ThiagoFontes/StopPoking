@@ -1,6 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-
-import 'typeitem.dart';
+import 'type.dart';
 
 part 'types.g.dart';
 

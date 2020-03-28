@@ -1,5 +1,8 @@
+import 'package:data/entity/moveitem.dart';
 import 'package:data/entity/types.dart';
 import 'package:json_annotation/json_annotation.dart';
+
+import 'move.dart';
 
 part 'pokemon.g.dart';
 
@@ -11,6 +14,7 @@ class Pokemon {
   String name;
   int weight;
   List<Types> types;
+  List<MoveItem> moves;
 
   factory Pokemon.fromJson(Map<String, dynamic> json) =>
       _$PokemonFromJson(json);

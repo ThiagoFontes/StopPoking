@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'typeitem.g.dart';
+part 'type.g.dart';
 
 @JsonSerializable()
 class TypeItem {

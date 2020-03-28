@@ -21,6 +21,7 @@ void main() {
       Pokemon charmander = Pokemon.fromJson(json.jsonDecode(jsonStr));
       expect(charmander.name, "charmander");
       expect(charmander.types.first.type.name, "fire");
+      expect(charmander.moves[2].move.name, "thunder-punch");
     });
   });
 }
