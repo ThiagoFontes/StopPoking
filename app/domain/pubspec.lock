@@ -57,6 +57,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.1"
+  core:
+    dependency: "direct main"
+    description:
+      path: "..\\core"
+      relative: true
+    source: path
+    version: "1.0.0+1"
   coverage:
     dependency: transitive
     description:

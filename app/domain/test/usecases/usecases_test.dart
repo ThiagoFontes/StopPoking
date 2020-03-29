@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:domain/entity/pokemon_name_item.dart';
 import 'package:domain/repositories/pokemonrepository.dart';
 import 'package:domain/usecases/pokemon_list.dart';
@@ -30,7 +28,7 @@ void main() {
       when(mockPokemonRepository.getPokemonList(offsetNumber))
           .thenAnswer((_) async => pokemonNameList);
       // Act
-      final result = await usecase.execute(number: offsetNumber);
+      final result = await usecase(Params(offsetNumber));
       // Assert
       expect(result, pokemonNameList);
       verify(mockPokemonRepository.getPokemonList(offsetNumber));
