@@ -6,16 +6,16 @@ class PokemonEntity extends Equatable {
   final String name;
   final int weight;
   final int height;
-  final List<TypesEntity> typesStr;
-  final List<MovesEntity> movesStr;
+  final List<TypesEntity> types;
+  final List<MovesEntity> moves;
 
   PokemonEntity({
     @required this.id,
     @required this.name,
     @required this.weight,
     @required this.height,
-    @required this.typesStr,
-    @required this.movesStr,
+    @required this.types,
+    @required this.moves,
   });
 
   @override

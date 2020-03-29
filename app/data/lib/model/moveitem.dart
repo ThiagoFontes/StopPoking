@@ -1,15 +1,16 @@
 import 'package:data/model/move.dart';
+import 'package:domain/entities.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'moveitem.g.dart';
 
 @JsonSerializable()
-class Moves {
-  MoveItem move;
+class Moves extends MovesEntity {
+  final MoveItem move;
   @JsonKey(ignore: true)
   String versionGroupDetails;
 
-  Moves(this.move);
+  Moves(this.move) : super(move);
 
   factory Moves.fromJson(Map<String, dynamic> json) =>
       _$MovesFromJson(json);

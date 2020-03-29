@@ -21,9 +21,9 @@ void main() {
     id: 4,
     name: "charmander",
     height: 6,
-    movesStr: <MovesEntity>[],
+    moves: <MovesEntity>[],
     weight: 85,
-    typesStr: <TypesEntity>[],
+    types: <TypesEntity>[],
   );
 
   group("Get pokemons by name", () {

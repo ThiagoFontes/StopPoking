@@ -1,11 +1,12 @@
 import 'package:data/model/moveitem.dart';
 import 'package:data/model/types.dart';
+import 'package:domain/entities.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'pokemon.g.dart';
 
 @JsonSerializable()
-class PokemonModel {
+class PokemonModel extends PokemonEntity {
   final int id;
   final String name;
   final int weight;
