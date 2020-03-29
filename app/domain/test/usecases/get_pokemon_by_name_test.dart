@@ -17,13 +17,13 @@ void main() {
 
 
   final String pokemonName = "charmander";
-  final Pokemon item = Pokemon(
+  final PokemonEntity item = PokemonEntity(
     id: 4,
     name: "charmander",
     height: 6,
-    moves: <String>[],
+    movesStr: <MovesEntity>[],
     weight: 85,
-    types: <String>[],
+    typesStr: <TypesEntity>[],
   );
 
   group("Get pokemons by name", () {
