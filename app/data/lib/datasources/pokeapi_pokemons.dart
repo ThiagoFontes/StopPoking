@@ -1,11 +1,24 @@
-import 'package:data/model/pokemon.dart';
-import 'package:data/model/pokemon_name_list.dart';
+import 'package:domain/entities/pokemon.dart';
+import 'package:domain/entities/pokemon_name_list/pokemon_name_list.dart';
 import 'package:domain/repositories/pokemonrepository.dart';
 
-abstract class PokemonsRemoteDataSource implements PokemonRepositoryContract{
-  Future<PokemonNamesList> getPokemonList(int offset);
+class PokemonsRemoteDataSource implements PokemonRepositoryContract{
+  @override
+  Future<PokemonEntity> getPokemonById(int id) {
+    // TODO: implement getPokemonById
+    return null;
+  }
 
-  Future<PokemonModel> getPokemonById(int id);
+  @override
+  Future<PokemonEntity> getPokemonByName(String name) {
+    // TODO: implement getPokemonByName
+    return null;
+  }
 
-  Future<PokemonModel> getPokemonByName(String name);
+  @override
+  Future<PokemonNameListEntity> getPokemonList(int offset) {
+    // TODO: implement getPokemonList
+    return null;
+  }
+  
 }
