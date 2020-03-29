@@ -1,15 +1,15 @@
-import 'package:domain/entities/pokemon_name_item.dart';
+import 'package:domain/entities/pokemon_name_list/pokemon_name_item.dart';
 import 'package:domain/repositories/pokemonrepository.dart';
 import 'package:equatable/equatable.dart';
 import 'package:core/domain.dart';
 
-class GetPokemonList implements UseCase<List<PokemonNameItem>, Params> {
+class GetPokemonList implements UseCase<List<PokemonNameItemEntity>, Params> {
   final PokemonRepositoryContract repositoryContract;
 
   GetPokemonList(this.repositoryContract);
 
   @override
-  Future<List<PokemonNameItem>> call(Params params) async {
+  Future<List<PokemonNameItemEntity>> call(Params params) async {
     return await repositoryContract.getPokemonList(params.number);
   }
 }
