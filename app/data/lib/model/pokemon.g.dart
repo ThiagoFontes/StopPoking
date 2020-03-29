@@ -17,8 +17,8 @@ PokemonModel _$PokemonModelFromJson(Map<String, dynamic> json) {
             (e) => e == null ? null : Types.fromJson(e as Map<String, dynamic>))
         ?.toList(),
     moves: (json['moves'] as List)
-        ?.map((e) =>
-            e == null ? null : MoveItem.fromJson(e as Map<String, dynamic>))
+        ?.map(
+            (e) => e == null ? null : Moves.fromJson(e as Map<String, dynamic>))
         ?.toList(),
   );
 }

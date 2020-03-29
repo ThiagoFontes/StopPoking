@@ -1,8 +1,5 @@
-import 'dart:io';
-
 import 'package:data/model/pokemon.dart';
 import 'package:data/model/pokemon_name_list.dart';
-import 'package:domain/entities.dart';
 import 'dart:convert' as json;
 import 'package:test/test.dart';
 
@@ -26,7 +23,6 @@ void main() {
       expect(charmander.name, "charmander");
       expect(charmander.types.first.type.name, "fire");
       expect(charmander.moves[2].move.name, "thunder-punch");
-      expect(charmander, isA<Pokemon>());
       expect(charmander.height, 6);
     });
 

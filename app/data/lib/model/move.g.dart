@@ -6,14 +6,14 @@ part of 'move.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Move _$MoveFromJson(Map<String, dynamic> json) {
-  return Move(
+MoveItem _$MoveItemFromJson(Map<String, dynamic> json) {
+  return MoveItem(
     json['name'] as String,
     json['url'] as String,
   );
 }
 
-Map<String, dynamic> _$MoveToJson(Move instance) => <String, dynamic>{
+Map<String, dynamic> _$MoveItemToJson(MoveItem instance) => <String, dynamic>{
       'name': instance.name,
       'url': instance.url,
     };

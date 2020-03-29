@@ -3,13 +3,13 @@ import 'package:json_annotation/json_annotation.dart';
 part 'move.g.dart';
 
 @JsonSerializable()
-class Move {
+class MoveItem {
   String name;
   String url;
 
-  Move(this.name, this.url);
+  MoveItem(this.name, this.url);
 
-  factory Move.fromJson(Map<String, dynamic> json) => _$MoveFromJson(json);
+  factory MoveItem.fromJson(Map<String, dynamic> json) => _$MoveItemFromJson(json);
 
-  Map<String, dynamic> toJson(instance) => _$MoveToJson(this);
+  Map<String, dynamic> toJson(instance) => _$MoveItemToJson(this);
 }
