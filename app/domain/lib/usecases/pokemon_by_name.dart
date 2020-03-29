@@ -3,13 +3,13 @@ import 'package:domain/entity/pokemon.dart';
 import 'package:domain/repositories/pokemonrepository.dart';
 import 'package:equatable/equatable.dart';
 
-class GetPokemonByName implements UseCase<Pokemon, Params> {
+class GetPokemonByName implements UseCase<PokemonEntity, Params> {
   final PokemonRepositoryContract repositoryContract;
 
   GetPokemonByName(this.repositoryContract);
 
   @override
-  Future<Pokemon> call(Params params) async {
+  Future<PokemonEntity> call(Params params) async {
     return await repositoryContract.getPokemonByName(params.name);
   }
 }
