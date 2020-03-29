@@ -6,8 +6,8 @@ part of 'pokemon.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Pokemon _$PokemonFromJson(Map<String, dynamic> json) {
-  return Pokemon(
+PokemonModel _$PokemonModelFromJson(Map<String, dynamic> json) {
+  return PokemonModel(
     id: json['id'] as int,
     name: json['name'] as String,
     weight: json['weight'] as int,
@@ -23,7 +23,8 @@ Pokemon _$PokemonFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$PokemonToJson(Pokemon instance) => <String, dynamic>{
+Map<String, dynamic> _$PokemonModelToJson(PokemonModel instance) =>
+    <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'weight': instance.weight,

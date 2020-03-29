@@ -2,8 +2,11 @@ import 'dart:io';
 
 import 'package:data/model/pokemon.dart';
 import 'package:data/model/pokemon_name_list.dart';
+import 'package:domain/entities.dart';
 import 'dart:convert' as json;
 import 'package:test/test.dart';
+
+import 'mock/mock_reader.dart';
 
 void main() {
   group("Pokemons Parsing", () {
@@ -13,23 +16,23 @@ void main() {
     "name": "butterfree"
     }""";
 
-      expect(Pokemon.fromJson(json.jsonDecode(jsonStr)).name, "butterfree");
+      expect(
+          PokemonModel.fromJson(json.jsonDecode(jsonStr)).name, "butterfree");
     });
 
     test("Parses another pokemon", () async {
-      final File file = new File("test/mock/charmander.json");
-      final String jsonStr = await file.readAsString();
-      Pokemon charmander = Pokemon.fromJson(json.jsonDecode(jsonStr));
+      PokemonModel charmander =
+          PokemonModel.fromJson(json.jsonDecode(mock('charmander.json')));
       expect(charmander.name, "charmander");
       expect(charmander.types.first.type.name, "fire");
       expect(charmander.moves[2].move.name, "thunder-punch");
+      expect(charmander, isA<Pokemon>());
       expect(charmander.height, 6);
     });
 
     test("Parses a list of pokemons", () async {
-      final File file = new File("test/mock/pokemon_list_final.json");
-      final String jsonStr = await file.readAsString();
-      PokemonNamesList pokemonList = PokemonNamesList.fromJson(json.jsonDecode(jsonStr));
+      PokemonNamesList pokemonList = PokemonNamesList.fromJson(
+          json.jsonDecode(mock('pokemon_list_final.json')));
 
       expect(pokemonList.count, 964);
       expect(pokemonList.next, null);

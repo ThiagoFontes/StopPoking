@@ -8,6 +8,8 @@ environment:
 
 dependencies:
   json_annotation: ^3.0.1
+  domain:
+    path: ../domain
 
 dev_dependencies:
   # Provides testing framework
