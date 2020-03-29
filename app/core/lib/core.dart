@@ -1,3 +1,3 @@
 library core;
 
-export 'package:core/usecases/usecase.dart';
+export 'package:core/domain/usecases/usecase.dart';
