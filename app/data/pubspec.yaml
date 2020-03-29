@@ -22,3 +22,6 @@ dev_dependencies:
 
   # Provides Json serialization
   json_serializable: ^3.3.0
+
+  # Provides mocks
+  mockito: ^4.1.1

@@ -1,4 +1,5 @@
 import 'package:data/model/pokemon.dart';
+import 'package:data/model/pokemon_name_list.dart';
 import 'package:domain/entities.dart';
 
 PokemonEntity mapToPokemonEntity(PokemonModel pokemonModel) {
@@ -12,5 +13,10 @@ PokemonEntity mapToPokemonEntity(PokemonModel pokemonModel) {
     moves: pokemonModel.moves,
     types: pokemonModel.types,
   );
+  return entity;
+}
+
+PokemonNameListEntity mapToPokemonListEntity(PokemonNamesList pokemonNamesList) {
+  final PokemonNameListEntity entity = pokemonNamesList;
   return entity;
 }
