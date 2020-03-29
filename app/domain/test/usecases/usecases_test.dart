@@ -1,4 +1,5 @@
 import 'package:domain/entities/pokemon_name_list/pokemon_name_item.dart';
+import 'package:domain/entities/pokemon_name_list/pokemon_name_list.dart';
 import 'package:domain/repositories/pokemonrepository.dart';
 import 'package:domain/usecases/pokemon_list.dart';
 import 'package:test/test.dart';
@@ -20,7 +21,8 @@ void main() {
   PokemonNameItemEntity item = PokemonNameItemEntity(
       name: "togedemaru-totem",
       url: "https://pokeapi.co/api/v2/pokemon/10154/");
-  final List<PokemonNameItemEntity> pokemonNameList = [item];
+  final PokemonNameListEntity pokemonNameList =
+      PokemonNameListEntity(null, 964, [item]);
 
   group("Pokemons List tests with mocks", () {
     test("Get final list of pokemons (offset 960)", () async {
