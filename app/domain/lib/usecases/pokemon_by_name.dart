@@ -1,4 +1,4 @@
-import 'package:core/core.dart';
+import 'package:core/domain.dart';
 import 'package:domain/entity/pokemon.dart';
 import 'package:domain/repositories/pokemonrepository.dart';
 import 'package:equatable/equatable.dart';

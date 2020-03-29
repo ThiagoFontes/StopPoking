@@ -1,7 +1,7 @@
 import 'package:domain/entity/pokemon_name_item.dart';
 import 'package:domain/repositories/pokemonrepository.dart';
 import 'package:equatable/equatable.dart';
-import 'package:core/core.dart';
+import 'package:core/domain.dart';
 
 class GetPokemonList implements UseCase<List<PokemonNameItem>, Params> {
   final PokemonRepositoryContract repositoryContract;
