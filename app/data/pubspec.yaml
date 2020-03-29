@@ -10,6 +10,8 @@ dependencies:
   json_annotation: ^3.0.1
   domain:
     path: ../domain
+  core:
+    path: ../core
 
 dev_dependencies:
   # Provides testing framework

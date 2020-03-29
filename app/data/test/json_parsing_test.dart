@@ -34,5 +34,11 @@ void main() {
       expect(pokemonList.next, null);
       expect(pokemonList.results.first.name, "togedemaru-totem");
     });
+
+    test("Invalid error response", () async {
+      PokemonNamesList namesList =
+          PokemonNamesList.fromJson(json.jsonDecode("""{"error": "json"}"""));
+      expect(namesList.count, null);
+    });
   });
 }

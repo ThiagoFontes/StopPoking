@@ -1,4 +1,4 @@
 library entities;
 
-export 'package:domain/entity/pokemon.dart';
-export 'package:domain/entity/pokemon_name_item.dart';
+export 'package:domain/entities/pokemon.dart';
+export 'package:domain/entities/pokemon_name_item.dart';

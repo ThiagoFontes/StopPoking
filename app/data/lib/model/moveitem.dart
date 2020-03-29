@@ -7,8 +7,6 @@ part 'moveitem.g.dart';
 @JsonSerializable()
 class Moves extends MovesEntity {
   final MoveItem move;
-  @JsonKey(ignore: true)
-  String versionGroupDetails;
 
   Moves(this.move) : super(move);
 

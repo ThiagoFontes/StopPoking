@@ -1,4 +1,4 @@
-import 'package:domain/entity/pokemon_name_item.dart';
+import 'package:domain/entities/pokemon_name_item.dart';
 import 'package:domain/repositories/pokemonrepository.dart';
 import 'package:domain/usecases/pokemon_list.dart';
 import 'package:test/test.dart';
