@@ -20,14 +20,26 @@ if ! echo "$commitTitle" | grep -qE '^(?:feat|fix|docs|style|refactor|perf|test|
 	exit 1
 fi
 
+
+# stash any unstaged changes
+git stash -q --keep-index
+
 # run Flutter analyze
 flutter analyze
 if [ $? -ne 0 ]; then
+		# unstash the unstashed changes
+        git stash pop -q
         exit 1
 fi
 
 # run Flutter format
 flutter format .
 if [ $? -ne 0 ]; then
+		# unstash the unstashed changes
+        git stash pop -q
         exit 1
 fi
+
+# unstash the unstashed changes
+git stash pop -q
+exit 0
