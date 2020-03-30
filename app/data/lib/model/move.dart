@@ -10,7 +10,8 @@ class MoveItem extends MoveItemEntity {
 
   MoveItem(this.name, this.url) : super(name);
 
-  factory MoveItem.fromJson(Map<String, dynamic> json) => _$MoveItemFromJson(json);
+  factory MoveItem.fromJson(Map<String, dynamic> json) =>
+      _$MoveItemFromJson(json);
 
   Map<String, dynamic> toJson(instance) => _$MoveItemToJson(this);
 }

@@ -41,4 +41,6 @@ void main() {
       verify(mockGetPokemonList(Params(offset: tOffset)));
     });
   });
+
+  bloc.close();
 }

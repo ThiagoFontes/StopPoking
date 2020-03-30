@@ -22,12 +22,12 @@ void main() {
 
   void setUpMockHttpClientSucess() {
     when(mockHttpClient.get(any, headers: anyNamed('headers'))).thenAnswer(
-          (_) async => http.Response(mock('pokemon_list_final.json'), 200));
+        (_) async => http.Response(mock('pokemon_list_final.json'), 200));
   }
 
   void setUpMockHttpClientError() {
     when(mockHttpClient.get(any, headers: anyNamed('headers'))).thenAnswer(
-          (_) async => http.Response(mock('pokemon_list_final.json'), 404));
+        (_) async => http.Response(mock('pokemon_list_final.json'), 404));
   }
 
   group("Test http client", () {
@@ -64,7 +64,7 @@ void main() {
 
       final call = dataSource.getPokemonList;
 
-      expect(()=> call(tOffset), throwsA(TypeMatcher<ServerException>()));
+      expect(() => call(tOffset), throwsA(TypeMatcher<ServerException>()));
     });
   });
 }

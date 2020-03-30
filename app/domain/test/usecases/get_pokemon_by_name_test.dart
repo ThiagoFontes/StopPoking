@@ -15,7 +15,6 @@ void main() {
     usecase = GetPokemonByNameUseCase(mockPokemonRepository);
   });
 
-
   final String pokemonName = "charmander";
   final PokemonEntity item = PokemonEntity(
     id: 4,

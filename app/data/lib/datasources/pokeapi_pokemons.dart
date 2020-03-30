@@ -44,7 +44,7 @@ class PokemonsRemoteDataSource implements PokemonsRemoteDataSourceContract {
     if (response.statusCode == 200) {
       return PokemonNamesList.fromJson(jsonDecode(response.body));
     } else {
-      throw ServerException(); 
+      throw ServerException();
     }
   }
 }

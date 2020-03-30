@@ -16,7 +16,8 @@ PokemonEntity mapToPokemonEntity(PokemonModel pokemonModel) {
   return entity;
 }
 
-PokemonNameListEntity mapToPokemonListEntity(PokemonNamesList pokemonNamesList) {
+PokemonNameListEntity mapToPokemonListEntity(
+    PokemonNamesList pokemonNamesList) {
   final PokemonNameListEntity entity = pokemonNamesList;
   return entity;
 }

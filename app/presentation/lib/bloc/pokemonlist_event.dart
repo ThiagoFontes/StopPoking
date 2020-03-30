@@ -4,7 +4,6 @@ abstract class PokemonlistEvent extends Equatable {
   const PokemonlistEvent();
 }
 
-
 class GetPagedListOfPokemons extends PokemonlistEvent {
   final int offset;
 

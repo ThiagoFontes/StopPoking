@@ -14,7 +14,7 @@ import '../mock/mock_reader.dart';
 class MockPokemonsRemoteDataSource extends Mock
     implements PokemonsRemoteDataSourceContract {}
 
-class MockDataConnection extends Mock implements DataConnectionChecker{}
+class MockDataConnection extends Mock implements DataConnectionChecker {}
 
 void main() {
   MockPokemonsRemoteDataSource mockPokemonsRemoteDataSource;
@@ -27,9 +27,8 @@ void main() {
     mockDataConnection = MockDataConnection();
     networkInfo = NetworkInfo(mockDataConnection);
     pokemonRepository = PokemonRepository(
-      pokemonsRemoteDataSource: mockPokemonsRemoteDataSource,
-      networkInfo: networkInfo
-    );
+        pokemonsRemoteDataSource: mockPokemonsRemoteDataSource,
+        networkInfo: networkInfo);
   });
 
   group("Pokemon Repository tests", () {
