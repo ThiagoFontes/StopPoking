@@ -1,3 +1,4 @@
+import 'package:core/network/network_info.dart';
 import 'package:data/datasources/pokeapi_pokemons.dart';
 import 'package:domain/entities/pokemon.dart';
 import 'package:domain/entities/pokemon_name_list/pokemon_name_list.dart';
@@ -5,10 +6,12 @@ import 'package:domain/repositories.dart';
 import 'package:meta/meta.dart';
 
 class PokemonRepository implements PokemonRepositoryContract {
-  final PokemonsRemoteDataSource pokemonsRemoteDataSource;
+  final PokemonsRemoteDataSourceContract pokemonsRemoteDataSource;
+  final NetworkInfo networkInfo;
 
   PokemonRepository({
     @required this.pokemonsRemoteDataSource,
+    @required this.networkInfo,
   });
 
   @override
@@ -25,6 +28,10 @@ class PokemonRepository implements PokemonRepositoryContract {
 
   @override
   Future<PokemonNameListEntity> getPokemonList(int offset) async {
-    return pokemonsRemoteDataSource.getPokemonList(offset);
+    if (await networkInfo.isConnected) {
+      return pokemonsRemoteDataSource.getPokemonList(offset);
+    } else {
+      return null;
+    }
   }
 }

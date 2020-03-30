@@ -7,6 +7,7 @@ environment:
   sdk: ">=2.1.0 <3.0.0"
 
 dependencies:
+  http: ^0.12.0+4
   json_annotation: ^3.0.1
   domain:
     path: ../domain
@@ -25,3 +26,6 @@ dev_dependencies:
 
   # Provides mocks
   mockito: ^4.1.1
+
+  # Network information
+  data_connection_checker: ^0.3.4
