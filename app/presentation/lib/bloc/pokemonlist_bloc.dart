@@ -27,7 +27,7 @@ class PokemonlistBloc extends Bloc<PokemonlistEvent, PokemonlistState> {
     PokemonlistEvent event,
   ) async* {
     if (event is GetPagedListOfPokemons) {
-      GetPagedListOfPokemons(offset: event.offset);
+      getPokemonList(Params(offset: event.offset));
     }
   }
 }
