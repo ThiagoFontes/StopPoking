@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:domain/entities.dart';
-import 'package:domain/usecases/pokemon_list.dart';
+import 'package:domain/usecases.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 

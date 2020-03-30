@@ -1,6 +1,6 @@
 import 'package:domain/entities/pokemon.dart';
 import 'package:domain/repositories/pokemonrepository.dart';
-import 'package:domain/usecases/pokemon_by_name.dart';
+import 'package:domain/usecases.dart';
 import 'package:test/test.dart';
 
 import 'package:mockito/mockito.dart';
@@ -32,7 +32,7 @@ void main() {
       when(mockPokemonRepository.getPokemonByName(pokemonName))
           .thenAnswer((_) async => item);
       // Act
-      final result = await usecase(Params(pokemonName));
+      final result = await usecase(pokemonName);
       // Assert
       expect(result, item);
       verify(mockPokemonRepository.getPokemonByName(pokemonName));
