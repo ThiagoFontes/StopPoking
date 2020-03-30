@@ -19,3 +19,9 @@ if ! echo "$commitTitle" | grep -qE '^(?:feat|fix|docs|style|refactor|perf|test|
 	echo "Please see https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#commit-message-format"
 	exit 1
 fi
+
+# run Flutter analyze
+flutter analyze
+
+# run Flutter format
+flutter format .
