@@ -4,7 +4,6 @@ import 'package:data/datasources/pokeapi_pokemons.dart';
 import 'package:data/model/pokemon_name_list.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
-import 'package:convert/convert.dart';
 import 'package:http/http.dart' as http;
 import 'package:core/exception.dart';
 
