@@ -22,6 +22,12 @@ fi
 
 # run Flutter analyze
 flutter analyze
+if [ $? -ne 0 ]; then
+        exit 1
+fi
 
 # run Flutter format
 flutter format .
+if [ $? -ne 0 ]; then
+        exit 1
+fi
