@@ -30,7 +30,7 @@ void main() {
       when(mockPokemonRepository.getPokemonList(offsetNumber))
           .thenAnswer((_) async => pokemonNameList);
       // Act
-      final result = await usecase(Params(offsetNumber));
+      final result = await usecase(Params(offset: offsetNumber));
       // Assert
       expect(result, pokemonNameList);
       verify(mockPokemonRepository.getPokemonList(offsetNumber));

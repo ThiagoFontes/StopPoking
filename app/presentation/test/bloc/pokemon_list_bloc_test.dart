@@ -32,13 +32,13 @@ void main() {
     final PokemonNameListEntity pokemonNameListEntity = pokemonNameList;
 
     test("Should call usecase with 0 offset", () async {
-      when(mockGetPokemonList(Params(tOffset)))
+      when(mockGetPokemonList(Params(offset: tOffset)))
           .thenAnswer((_) async => pokemonNameListEntity);
 
       bloc.add(GetPagedListOfPokemons(offset: tOffset));
       await untilCalled(mockGetPokemonList(any));
 
-      verify(mockGetPokemonList(Params(tOffset)));
+      verify(mockGetPokemonList(Params(offset: tOffset)));
     });
   });
 }
