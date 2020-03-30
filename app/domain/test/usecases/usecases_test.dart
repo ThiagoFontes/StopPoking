@@ -9,11 +9,11 @@ import 'package:mockito/mockito.dart';
 class MockPokemonRepository extends Mock implements PokemonRepositoryContract {}
 
 void main() {
-  GetPokemonList usecase;
+  GetPokemonListUseCase usecase;
   MockPokemonRepository mockPokemonRepository;
   setUp(() {
     mockPokemonRepository = MockPokemonRepository();
-    usecase = GetPokemonList(mockPokemonRepository);
+    usecase = GetPokemonListUseCase(mockPokemonRepository);
   });
 
   final offsetNumber = 960;

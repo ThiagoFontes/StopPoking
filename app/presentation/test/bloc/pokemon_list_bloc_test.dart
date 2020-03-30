@@ -4,7 +4,7 @@ import 'package:mockito/mockito.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:presentation/bloc/pokemonlist_bloc.dart';
 
-class MockGetPokemonList extends Mock implements GetPokemonList {}
+class MockGetPokemonList extends Mock implements GetPokemonListUseCase {}
 
 void main() {
   PokemonlistBloc bloc;

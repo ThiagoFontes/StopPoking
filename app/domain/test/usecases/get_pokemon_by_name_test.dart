@@ -8,11 +8,11 @@ import 'package:mockito/mockito.dart';
 class MockPokemonRepository extends Mock implements PokemonRepositoryContract {}
 
 void main() {
-  GetPokemonByName usecase;
+  GetPokemonByNameUseCase usecase;
   MockPokemonRepository mockPokemonRepository;
   setUp(() {
     mockPokemonRepository = MockPokemonRepository();
-    usecase = GetPokemonByName(mockPokemonRepository);
+    usecase = GetPokemonByNameUseCase(mockPokemonRepository);
   });
 
 

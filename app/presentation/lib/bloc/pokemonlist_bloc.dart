@@ -12,10 +12,10 @@ part 'pokemonlist_state.dart';
 // EVENT -> BLOC -> STATE
 
 class PokemonlistBloc extends Bloc<PokemonlistEvent, PokemonlistState> {
-  final GetPokemonList getPokemonList;
+  final GetPokemonListUseCase getPokemonList;
 
   PokemonlistBloc({
-    @required GetPokemonList getList,
+    @required GetPokemonListUseCase getList,
   })  : assert(getList != null),
         getPokemonList = getList;
 
