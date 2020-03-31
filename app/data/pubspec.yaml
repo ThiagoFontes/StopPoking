@@ -1,0 +1,31 @@
+name: data
+description: Data layer of the application
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.1.0 <3.0.0"
+
+dependencies:
+  http: ^0.12.0+4
+  json_annotation: ^3.0.1
+  domain:
+    path: ../domain
+  core:
+    path: ../core
+
+dev_dependencies:
+  # Provides testing framework
+  test: ^1.14.2
+
+  # Provides code gen
+  build_runner: ^1.8.0
+
+  # Provides Json serialization
+  json_serializable: ^3.3.0
+
+  # Provides mocks
+  mockito: ^4.1.1
+
+  # Network information
+  data_connection_checker: ^0.3.4

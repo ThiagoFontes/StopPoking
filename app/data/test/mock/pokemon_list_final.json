@@ -1,0 +1,23 @@
+{
+  "count": 964,
+  "next": null,
+  "previous": "https://pokeapi.co/api/v2/pokemon/?offset=956&limit=4",
+  "results": [
+    {
+      "name": "togedemaru-totem",
+      "url": "https://pokeapi.co/api/v2/pokemon/10154/"
+    },
+    {
+      "name": "necrozma-dusk",
+      "url": "https://pokeapi.co/api/v2/pokemon/10155/"
+    },
+    {
+      "name": "necrozma-dawn",
+      "url": "https://pokeapi.co/api/v2/pokemon/10156/"
+    },
+    {
+      "name": "necrozma-ultra",
+      "url": "https://pokeapi.co/api/v2/pokemon/10157/"
+    }
+  ]
+}
