@@ -28,17 +28,18 @@ void main() {
   });
 
   group("Get initial list", () {
-    final tOffset = 0;
+    final String nextListURL =
+        'https://pokeapi.co/api/v2/pokemon/?offset=960&limit=20';
     final PokemonNameListEntity pokemonNameListEntity = pokemonNameList;
 
     test("Should call usecase with 0 offset", () async {
-      when(mockGetPokemonList(Params(offset: tOffset)))
+      when(mockGetPokemonList(Params(url: nextListURL)))
           .thenAnswer((_) async => pokemonNameListEntity);
 
-      bloc.add(GetPagedListOfPokemons(offset: tOffset));
+      bloc.add(GetPagedListOfPokemons(url: nextListURL));
       await untilCalled(mockGetPokemonList(any));
 
-      verify(mockGetPokemonList(Params(offset: tOffset)));
+      verify(mockGetPokemonList(Params(url: nextListURL)));
       bloc.close();
     });
   });

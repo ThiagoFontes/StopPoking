@@ -27,9 +27,9 @@ class PokemonRepository implements PokemonRepositoryContract {
   }
 
   @override
-  Future<PokemonNameListEntity> getPokemonList(int offset) async {
+  Future<PokemonNameListEntity> getPokemonList(String url) async {
     if (await networkInfo.isConnected) {
-      return pokemonsRemoteDataSource.getPokemonList(offset);
+      return pokemonsRemoteDataSource.getPokemonList(url);
     } else {
       return null;
     }

@@ -7,7 +7,7 @@ import 'package:meta/meta.dart';
 import 'package:core/exception.dart';
 
 abstract class PokemonsRemoteDataSourceContract {
-  Future<PokemonNamesList> getPokemonList(int offset);
+  Future<PokemonNamesList> getPokemonList(String url);
 
   Future<PokemonModel> getPokemonById(int id);
 
@@ -34,9 +34,9 @@ class PokemonsRemoteDataSource implements PokemonsRemoteDataSourceContract {
   }
 
   @override
-  Future<PokemonNamesList> getPokemonList(int offset) async {
+  Future<PokemonNamesList> getPokemonList(String url) async {
     final response = await client.get(
-      'https://pokeapi.co/api/v2/pokemon/?offset=960&limit=20',
+      url,
       headers: {
         'Content-Type': 'application/json',
       },

@@ -31,7 +31,11 @@ void main() {
   }
 
   group("Test http client", () {
-    final int tOffset = 960;
+    final String firstListURL =
+        'https://pokeapi.co/api/v2/pokemon/?offset=0&limit=20';
+    final String nextListURL =
+        'https://pokeapi.co/api/v2/pokemon/?offset=960&limit=20';
+
     final PokemonNamesList pokemonNamesList = PokemonNamesList.fromJson(
       jsonDecode(
         mock('pokemon_list_final.json'),
@@ -41,10 +45,19 @@ void main() {
     test('Should pass application/json ando peform get request', () async {
       setUpMockHttpClientSucess();
 
-      dataSource.getPokemonList(tOffset);
+      dataSource.getPokemonList(nextListURL);
 
       verify(mockHttpClient.get(
-        'https://pokeapi.co/api/v2/pokemon/?offset=$tOffset&limit=20',
+        nextListURL,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      ));
+
+      dataSource.getPokemonList(firstListURL);
+
+      verify(mockHttpClient.get(
+        firstListURL,
         headers: {
           'Content-Type': 'application/json',
         },
@@ -54,7 +67,7 @@ void main() {
     test('Should return list of pokemons when status is 200', () async {
       setUpMockHttpClientSucess();
 
-      final response = await dataSource.getPokemonList(tOffset);
+      final response = await dataSource.getPokemonList(nextListURL);
 
       expect(response, pokemonNamesList);
     });
@@ -64,7 +77,7 @@ void main() {
 
       final call = dataSource.getPokemonList;
 
-      expect(() => call(tOffset), throwsA(TypeMatcher<ServerException>()));
+      expect(() => call(nextListURL), throwsA(TypeMatcher<ServerException>()));
     });
   });
 }

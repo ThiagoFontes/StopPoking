@@ -10,15 +10,15 @@ class GetPokemonListUseCase implements UseCase<PokemonNameListEntity, Params> {
 
   @override
   Future<PokemonNameListEntity> call(Params params) async {
-    return await repositoryContract.getPokemonList(params.offset);
+    return await repositoryContract.getPokemonList(params.url);
   }
 }
 
 class Params extends Equatable {
-  final int offset;
+  final String url;
 
-  Params({this.offset});
+  Params({this.url});
 
   @override
-  List<Object> get props => [offset];
+  List<Object> get props => [url];
 }

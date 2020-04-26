@@ -38,15 +38,17 @@ void main() {
 
     test('Test fetching list of pokemons', () async {
       // arrange
-      final offset = 960;
+      final String nextListURL =
+          'https://pokeapi.co/api/v2/pokemon/?offset=960&limit=20';
+
       when(mockDataConnection.hasConnection).thenAnswer((_) async => true);
       when(mockPokemonsRemoteDataSource.getPokemonList(any))
           .thenAnswer((_) async => pokemonList);
       //Todo Check network
       // act
-      final result = await pokemonRepository.getPokemonList(offset);
+      final result = await pokemonRepository.getPokemonList(nextListURL);
       // assert
-      verify(mockPokemonsRemoteDataSource.getPokemonList(offset));
+      verify(mockPokemonsRemoteDataSource.getPokemonList(nextListURL));
       expect(result, entity);
     });
   });

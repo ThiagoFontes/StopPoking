@@ -16,7 +16,8 @@ void main() {
     usecase = GetPokemonListUseCase(mockPokemonRepository);
   });
 
-  final offsetNumber = 960;
+  final String nextListURL =
+      'https://pokeapi.co/api/v2/pokemon/?offset=960&limit=20';
 
   PokemonNameItemEntity item = PokemonNameItemEntity(
       name: "togedemaru-totem",
@@ -27,13 +28,13 @@ void main() {
   group("Pokemons List tests with mocks", () {
     test("Get final list of pokemons (offset 960)", () async {
       // Arrange
-      when(mockPokemonRepository.getPokemonList(offsetNumber))
+      when(mockPokemonRepository.getPokemonList(nextListURL))
           .thenAnswer((_) async => pokemonNameList);
       // Act
-      final result = await usecase(Params(offset: offsetNumber));
+      final result = await usecase(Params(url: nextListURL));
       // Assert
       expect(result, pokemonNameList);
-      verify(mockPokemonRepository.getPokemonList(offsetNumber));
+      verify(mockPokemonRepository.getPokemonList(nextListURL));
       verifyNoMoreInteractions(mockPokemonRepository);
     });
   });
