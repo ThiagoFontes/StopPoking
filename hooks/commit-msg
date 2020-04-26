@@ -1,5 +1,3 @@
-#!/usr/bin/env bash
-
 if [ -z "$1" ]; then
 	echo "Missing argument (commit message). Did you try to run this manually?"
 	exit 1
