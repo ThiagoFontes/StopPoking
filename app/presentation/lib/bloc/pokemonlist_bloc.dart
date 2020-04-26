@@ -26,7 +26,7 @@ class PokemonlistBloc extends Bloc<PokemonlistEvent, PokemonlistState> {
   Stream<PokemonlistState> mapEventToState(
     PokemonlistEvent event,
   ) async* {
-    if (event is GetPagedListOfPokemons) {
+    if (event is GetFirstPageListOfPokemons) {
       getPokemonList(Params(url: event.url));
     }
   }
