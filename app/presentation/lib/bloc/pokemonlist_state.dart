@@ -14,11 +14,11 @@ class Loading extends PokemonlistState {
   List<Object> get props => null;
 }
 
-class ShowingList extends PokemonlistState {
+class Listing extends PokemonlistState {
   final String url;
   final PokemonNameListEntity pokemonNameList;
 
-  ShowingList({@required this.pokemonNameList, @required this.url});
+  Listing({@required this.pokemonNameList, @required this.url});
 
   @override
   List<Object> get props => [pokemonNameList, url];

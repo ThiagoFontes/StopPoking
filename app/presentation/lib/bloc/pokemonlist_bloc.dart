@@ -30,7 +30,7 @@ class PokemonlistBloc extends Bloc<PokemonlistEvent, PokemonlistState> {
       yield Loading();
       final PokemonNameListEntity pokemonList =
           await getPokemonList(Params(url: event.url));
-      yield ShowingList(pokemonNameList: pokemonList, url: pokemonList.next);
+      yield Listing(pokemonNameList: pokemonList, url: pokemonList.next);
     }
   }
 }

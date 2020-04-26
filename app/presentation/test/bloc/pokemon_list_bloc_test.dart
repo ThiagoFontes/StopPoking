@@ -49,7 +49,7 @@ void main() {
       final expected = [
         EmptyState(),
         Loading(),
-        ShowingList(
+        Listing(
             pokemonNameList: pokemonNameListEntity,
             url: pokemonNameListEntity.next),
       ];
