@@ -4,14 +4,9 @@ abstract class PokemonlistState extends Equatable {
   const PokemonlistState();
 }
 
-class PokemonlistInitial extends PokemonlistState {
-  @override
-  List<Object> get props => [];
-}
-
 class EmptyState extends PokemonlistState {
   @override
-  List<Object> get props => null;
+  List<Object> get props => [null];
 }
 
 class Loading extends PokemonlistState {
@@ -20,13 +15,13 @@ class Loading extends PokemonlistState {
 }
 
 class ShowingList extends PokemonlistState {
-  final int offset;
+  final String url;
   final PokemonNameListEntity pokemonNameList;
 
-  ShowingList({@required this.pokemonNameList, @required this.offset});
+  ShowingList({@required this.pokemonNameList, @required this.url});
 
   @override
-  List<Object> get props => [pokemonNameList, offset];
+  List<Object> get props => [pokemonNameList, url];
 }
 
 class ErrorState extends PokemonlistState {

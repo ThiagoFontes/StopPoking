@@ -13,8 +13,8 @@ void main() {
   PokemonNameItemEntity item = PokemonNameItemEntity(
       name: "togedemaru-totem",
       url: "https://pokeapi.co/api/v2/pokemon/10154/");
-  final PokemonNameListEntity pokemonNameList =
-      PokemonNameListEntity(null, 964, [item]);
+  final PokemonNameListEntity pokemonNameList = PokemonNameListEntity(
+      'https://pokeapi.co/api/v2/pokemon/?offset=20&limit=20', 964, [item]);
 
   setUp(() {
     mockGetPokemonList = MockGetPokemonList();
@@ -23,7 +23,7 @@ void main() {
 
   group("Block test", () {
     test("Initial state should be empty", () {
-      expect(bloc.initialState, PokemonlistInitial());
+      expect(bloc.initialState, EmptyState());
     });
   });
 
@@ -32,7 +32,7 @@ void main() {
         'https://pokeapi.co/api/v2/pokemon/?offset=0&limit=20';
     final PokemonNameListEntity pokemonNameListEntity = pokemonNameList;
 
-    test("Should call usecase with 0 offset", () async {
+    test("Should call usecase with 0 offset and has a next url", () async {
       when(mockGetPokemonList(Params(url: firstListURL)))
           .thenAnswer((_) async => pokemonNameListEntity);
 
@@ -40,7 +40,21 @@ void main() {
       await untilCalled(mockGetPokemonList(any));
 
       verify(mockGetPokemonList(Params(url: firstListURL)));
-      bloc.close();
+    });
+
+    test("Should emit empty state, loading and First list retrieved", () {
+      when(mockGetPokemonList(Params(url: firstListURL)))
+          .thenAnswer((_) async => pokemonNameListEntity);
+
+      final expected = [
+        EmptyState(),
+        Loading(),
+        ShowingList(pokemonNameList: pokemonNameListEntity, url: pokemonNameListEntity.next),
+      ];
+
+      expectLater(bloc, emitsInOrder(expected));
+
+      bloc.add(GetFirstPageListOfPokemons());
     });
   });
 }

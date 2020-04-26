@@ -20,14 +20,16 @@ class PokemonlistBloc extends Bloc<PokemonlistEvent, PokemonlistState> {
         getPokemonList = getList;
 
   @override
-  PokemonlistState get initialState => PokemonlistInitial();
+  PokemonlistState get initialState => EmptyState();
 
   @override
   Stream<PokemonlistState> mapEventToState(
     PokemonlistEvent event,
   ) async* {
     if (event is GetFirstPageListOfPokemons) {
-      getPokemonList(Params(url: event.url));
+      yield Loading();
+      final PokemonNameListEntity pokemonList = await getPokemonList(Params(url: event.url));
+      yield ShowingList(pokemonNameList: pokemonList, url: pokemonList.next);
     }
   }
 }
