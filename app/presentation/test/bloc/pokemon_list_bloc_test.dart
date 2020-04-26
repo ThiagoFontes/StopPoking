@@ -49,7 +49,9 @@ void main() {
       final expected = [
         EmptyState(),
         Loading(),
-        ShowingList(pokemonNameList: pokemonNameListEntity, url: pokemonNameListEntity.next),
+        ShowingList(
+            pokemonNameList: pokemonNameListEntity,
+            url: pokemonNameListEntity.next),
       ];
 
       expectLater(bloc, emitsInOrder(expected));
