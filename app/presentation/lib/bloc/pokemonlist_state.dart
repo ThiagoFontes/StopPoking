@@ -26,9 +26,10 @@ class Listing extends PokemonlistState {
 
 class ErrorState extends PokemonlistState {
   final String error;
+  final String url;
 
-  ErrorState(this.error);
+  ErrorState({@required this.error, @required this.url});
 
   @override
-  List<Object> get props => [error];
+  List<Object> get props => [error, url];
 }

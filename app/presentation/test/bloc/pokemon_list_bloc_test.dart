@@ -1,5 +1,6 @@
 import 'package:domain/entities.dart';
 import 'package:domain/usecases/pokemon_list.dart';
+import 'package:core/exception.dart';
 import 'package:mockito/mockito.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:presentation/bloc/pokemonlist_bloc.dart';
@@ -52,6 +53,22 @@ void main() {
         Listing(
             pokemonNameList: pokemonNameListEntity,
             url: pokemonNameListEntity.next),
+      ];
+
+      expectLater(bloc, emitsInOrder(expected));
+
+      bloc.add(GetFirstPageListOfPokemons());
+    });
+
+    test("Should emit empty state, loading and Error state in case of error",
+        () {
+      when(mockGetPokemonList(Params(url: firstListURL)))
+          .thenThrow((_) async => ServerException());
+
+      final expected = [
+        EmptyState(),
+        Loading(),
+        ErrorState(url: firstListURL, error: "erro"),
       ];
 
       expectLater(bloc, emitsInOrder(expected));

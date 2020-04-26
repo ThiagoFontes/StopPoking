@@ -28,9 +28,14 @@ class PokemonlistBloc extends Bloc<PokemonlistEvent, PokemonlistState> {
   ) async* {
     if (event is GetFirstPageListOfPokemons) {
       yield Loading();
-      final PokemonNameListEntity pokemonList =
-          await getPokemonList(Params(url: event.url));
-      yield Listing(pokemonNameList: pokemonList, url: pokemonList.next);
+      try {
+        final PokemonNameListEntity pokemonList =
+            await getPokemonList(Params(url: event.url));
+
+        yield Listing(pokemonNameList: pokemonList, url: pokemonList.next);
+      } catch (e) {
+        yield ErrorState(url: event.url, error: "erro");
+      }
     }
   }
 }
