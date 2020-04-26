@@ -60,7 +60,7 @@ packages:
   core:
     dependency: transitive
     description:
-      path: "..\\core"
+      path: "../core"
       relative: true
     source: path
     version: "1.0.0+1"
@@ -88,7 +88,7 @@ packages:
   domain:
     dependency: "direct main"
     description:
-      path: "..\\domain"
+      path: "../domain"
       relative: true
     source: path
     version: "1.0.0+1"

@@ -39,7 +39,7 @@ void main() {
       await untilCalled(mockGetPokemonList(any));
 
       verify(mockGetPokemonList(Params(offset: tOffset)));
+      bloc.close();
     });
   });
-  bloc.close();
 }
