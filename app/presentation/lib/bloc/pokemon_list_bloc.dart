@@ -6,8 +6,8 @@ import 'package:domain/usecases.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
-part 'pokemonlist_event.dart';
-part 'pokemonlist_state.dart';
+part 'pokemon_list_event.dart';
+part 'pokemon_list_state.dart';
 
 // EVENT -> BLOC -> STATE
 

@@ -1,4 +1,4 @@
-part of 'pokemonlist_bloc.dart';
+part of 'pokemon_list_bloc.dart';
 
 abstract class PokemonlistState extends Equatable {
   const PokemonlistState();
@@ -22,6 +22,15 @@ class Listing extends PokemonlistState {
 
   @override
   List<Object> get props => [pokemonNameList, url];
+}
+
+class Loaded extends PokemonlistState {
+  final PokemonNameListEntity pokemonNameList;
+
+  Loaded({@required this.pokemonNameList});
+
+  @override
+  List<Object> get props => [pokemonNameList];
 }
 
 class ErrorState extends PokemonlistState {

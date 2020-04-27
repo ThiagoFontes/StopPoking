@@ -1,4 +1,4 @@
-part of 'pokemonlist_bloc.dart';
+part of 'pokemon_list_bloc.dart';
 
 abstract class PokemonlistEvent extends Equatable {
   const PokemonlistEvent();

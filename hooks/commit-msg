@@ -20,13 +20,13 @@ fi
 
 
 # stash any unstaged changes
-git stash -q --keep-index
+#git stash -q --keep-index
 
 # run Flutter analyze
 flutter analyze
 if [ $? -ne 0 ]; then
 		# unstash the unstashed changes
-        git stash pop -q
+        #git stash pop -q
         exit 1
 fi
 
@@ -34,10 +34,10 @@ fi
 flutter format .
 if [ $? -ne 0 ]; then
 		# unstash the unstashed changes
-        git stash pop -q
+        #git stash pop -q
         exit 1
 fi
 
 # unstash the unstashed changes
-git stash pop -q
+#git stash pop -q
 exit 0
