@@ -12,7 +12,8 @@ void main() {
 
   setUp(() {
     mockNetworkConnectionChecker = MockNetworkConnectionChecker();
-    networkInfo = NetworkInfo(mockNetworkConnectionChecker);
+    networkInfo =
+        NetworkInfo(dataConnectionChecker: mockNetworkConnectionChecker);
   });
 
   group("Is connected", () {

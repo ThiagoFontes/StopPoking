@@ -25,7 +25,7 @@ void main() {
   setUp(() {
     mockPokemonsRemoteDataSource = MockPokemonsRemoteDataSource();
     mockDataConnection = MockDataConnection();
-    networkInfo = NetworkInfo(mockDataConnection);
+    networkInfo = NetworkInfo(dataConnectionChecker: mockDataConnection);
     pokemonRepository = PokemonRepository(
         pokemonsRemoteDataSource: mockPokemonsRemoteDataSource,
         networkInfo: networkInfo);
