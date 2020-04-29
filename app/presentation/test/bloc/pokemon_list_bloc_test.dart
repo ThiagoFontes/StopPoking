@@ -3,7 +3,7 @@ import 'package:domain/usecases/pokemon_list.dart';
 import 'package:core/exception.dart';
 import 'package:mockito/mockito.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:presentation/bloc/pokemonlist_bloc.dart';
+import 'package:presentation/bloc/pokemon_list_bloc.dart';
 
 class MockGetPokemonList extends Mock implements GetPokemonListUseCase {}
 
@@ -14,8 +14,14 @@ void main() {
   PokemonNameItemEntity item = PokemonNameItemEntity(
       name: "togedemaru-totem",
       url: "https://pokeapi.co/api/v2/pokemon/10154/");
-  final PokemonNameListEntity pokemonNameList = PokemonNameListEntity(
-      'https://pokeapi.co/api/v2/pokemon/?offset=20&limit=20', 964, [item]);
+
+  final String firstListURL =
+      'https://pokeapi.co/api/v2/pokemon/?offset=0&limit=20';
+  final String lastListURL =
+      'https://pokeapi.co/api/v2/pokemon/?offset=640&limit=20';
+
+  final PokemonNameListEntity pokemonNameList =
+      PokemonNameListEntity(lastListURL, 964, [item]);
 
   setUp(() {
     mockGetPokemonList = MockGetPokemonList();
@@ -29,8 +35,6 @@ void main() {
   });
 
   group("Get initial list", () {
-    final String firstListURL =
-        'https://pokeapi.co/api/v2/pokemon/?offset=0&limit=20';
     final PokemonNameListEntity pokemonNameListEntity = pokemonNameList;
 
     test("Should call usecase with 0 offset and has a next url", () async {
@@ -75,5 +79,27 @@ void main() {
 
       bloc.add(GetFirstPageListOfPokemons());
     });
+
+//    test("Should load until url returned is null", () {
+//      final PokemonNameListEntity lastPokemonNameListEntity =
+//          PokemonNameListEntity(null, 964, [item]);
+//
+//      when(mockGetPokemonList(Params(url: firstListURL)))
+//          .thenAnswer((_) async => pokemonNameListEntity);
+//
+//      when(mockGetPokemonList(Params(url: lastListURL)))
+//          .thenAnswer((_) async => lastPokemonNameListEntity);
+//
+//      final expected = [
+//        EmptyState(),
+//        Loading(),
+//        Listing(pokemonNameList: lastPokemonNameListEntity, url: null),
+//        Loaded(pokemonNameList: lastPokemonNameListEntity),
+//      ];
+//
+//      expectLater(bloc, emitsInOrder(expected));
+//
+//      bloc.add(GetFirstPageListOfPokemons());
+//    });
   });
 }
