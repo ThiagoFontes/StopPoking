@@ -13,7 +13,7 @@ void main() {
   MockPokemonRepository mockPokemonRepository;
   setUp(() {
     mockPokemonRepository = MockPokemonRepository();
-    usecase = GetPokemonListUseCase(mockPokemonRepository);
+    usecase = GetPokemonListUseCase(repositoryContract: mockPokemonRepository);
   });
 
   final String nextListURL =
