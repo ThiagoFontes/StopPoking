@@ -10,13 +10,14 @@ import 'package:http/http.dart' as http;
 
 final sl = GetIt.instance;
 
-void init() {
+Future<void> setupLocator() async {
   //! Feature Pokemon List
   // Bloc
   sl.registerFactory(() => PokemonlistBloc(getList: sl()));
 
   // Use cases
-  sl.registerSingleton(() => GetPokemonListUseCase(repositoryContract: sl()));
+  sl.registerLazySingleton(
+      () => GetPokemonListUseCase(repositoryContract: sl()));
 
   // Repositories
   sl.registerLazySingleton<PokemonRepositoryContract>(

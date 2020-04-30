@@ -5,14 +5,13 @@ import 'package:core/domain.dart';
 import 'package:meta/meta.dart';
 
 class GetPokemonListUseCase implements UseCase<PokemonNameListEntity, Params> {
-  final PokemonRepositoryContract _repositoryContract;
+  final PokemonRepositoryContract repositoryContract;
 
-  GetPokemonListUseCase({@required repositoryContract})
-      : _repositoryContract = repositoryContract;
+  GetPokemonListUseCase({@required this.repositoryContract});
 
   @override
   Future<PokemonNameListEntity> call(Params params) async {
-    return await _repositoryContract.getPokemonList(params.url);
+    return await repositoryContract.getPokemonList(params.url);
   }
 }
 
