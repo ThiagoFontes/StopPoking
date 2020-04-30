@@ -1,7 +1,11 @@
+import 'package:app/injection_container.dart' as di;
 import 'package:flutter/material.dart';
 import 'package:presentation/screens.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  di.init();
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   final _appTitle = 'Stop Poking';
