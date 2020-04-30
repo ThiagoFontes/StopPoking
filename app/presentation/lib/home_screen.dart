@@ -1,64 +1,85 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_it/get_it.dart';
-
 import 'bloc/pokemon_list_bloc.dart';
 
-class MyHomePage extends StatefulWidget {
+class MyHomePage extends StatelessWidget {
   MyHomePage({Key key, this.title, this.sl}) : super(key: key);
 
   final String title;
-  final GetIt sl;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
+  final PokemonlistBloc sl;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text(
-          widget.title,
+          title,
           textAlign: TextAlign.center,
         ),
       ),
       body: BlocProvider(
-        create: (_) => widget.sl<PokemonlistBloc>(),
-        child: ListView.builder(
-          physics: ScrollPhysics(),
-          itemCount: 20,
-          itemBuilder: (context, i) {
-            return Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                width: double.infinity,
-                height: 20,
-                child: Row(
-                  children: <Widget>[
-                    Container(
-                      width: 50,
-                      child: Text(
-                        i.toString(),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                    VerticalDivider(
-                      color: Colors.grey,
-                    ),
-                    Placeholder(
-                      fallbackHeight: 100,
-                      fallbackWidth: 200,
-                    ),
-                  ],
-                ),
-              ),
-            );
-          },
-        ),
+        create: (_) => sl,
+        child: PokemonListWidget(),
       ),
+    );
+  }
+}
+
+class PokemonListWidget extends StatelessWidget {
+  const PokemonListWidget({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<PokemonlistBloc, PokemonlistState>(
+      builder: (context, state) {
+        if (state is EmptyState) {
+          BlocProvider.of<PokemonlistBloc>(context)
+              .add(GetFirstPageListOfPokemons());
+          return Container();
+        }
+        if (state is Loading) {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+        if (state is Listing) {
+          return ListView.builder(
+            physics: ScrollPhysics(),
+            itemCount: state.pokemonNameList.results.length,
+            itemBuilder: (context, i) {
+              var list = state.pokemonNameList.results;
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  width: double.infinity,
+                  height: 20,
+                  child: Row(
+                    children: <Widget>[
+                      Container(
+                        width: 50,
+                        child: Text(
+                          i.toString(),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      VerticalDivider(
+                        color: Colors.grey,
+                      ),
+                      Expanded(
+                        child: Text(list[i].name),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
+          );
+        }
+
+        return Container();
+      },
     );
   }
 }

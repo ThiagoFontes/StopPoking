@@ -1,11 +1,11 @@
-import 'package:app/injection_container.dart' as di;
 import 'package:flutter/material.dart';
+import 'package:presentation/bloc/pokemon_list_bloc.dart';
 import 'package:presentation/screens.dart';
 
-import 'injection_container.dart';
+import 'injection_container.dart' as di;
 
-void main() {
-  di.init();
+void main() async {
+  await di.setupLocator();
   runApp(MyApp());
 }
 
@@ -22,8 +22,8 @@ class MyApp extends StatelessWidget {
       ),
       home: MyHomePage(
         title: _appTitle,
-        sl: sl,
         key: Key('Home Screen Key'),
+        sl: di.sl<PokemonlistBloc>(),
       ),
     );
   }
