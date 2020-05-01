@@ -74,6 +74,7 @@ void main() {
 
       final expected = [
         EmptyState(),
+        Loading(),
         ErrorState(url: firstListURL, error: "erro"),
       ];
 
