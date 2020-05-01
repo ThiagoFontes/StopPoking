@@ -60,7 +60,7 @@ class PokemonListWidget extends StatelessWidget {
                       Container(
                         width: 50,
                         child: Text(
-                          i.toString(),
+                          (i + 1).toString(),
                           textAlign: TextAlign.center,
                         ),
                       ),
