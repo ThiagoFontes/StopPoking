@@ -66,7 +66,7 @@ class PokemonListWidget extends StatelessWidget {
 
   ListView construirLista(List<PokemonNameItemEntity> list) {
     return ListView.builder(
-      physics: ScrollPhysics(),
+      physics: BouncingScrollPhysics(),
       itemCount: list.length,
       itemBuilder: (context, i) {
         return Padding(
