@@ -79,27 +79,42 @@ void main() {
 
       bloc.add(GetFirstPageListOfPokemons());
     });
+  });
 
-//    test("Should load until url returned is null", () {
-//      final PokemonNameListEntity lastPokemonNameListEntity =
-//          PokemonNameListEntity(null, 964, [item]);
-//
-//      when(mockGetPokemonList(Params(url: firstListURL)))
-//          .thenAnswer((_) async => pokemonNameListEntity);
-//
-//      when(mockGetPokemonList(Params(url: lastListURL)))
-//          .thenAnswer((_) async => lastPokemonNameListEntity);
-//
-//      final expected = [
-//        EmptyState(),
-//        Loading(),
-//        Listing(pokemonNameList: lastPokemonNameListEntity, url: null),
-//        Loaded(pokemonNameList: lastPokemonNameListEntity),
-//      ];
-//
-//      expectLater(bloc, emitsInOrder(expected));
-//
-//      bloc.add(GetFirstPageListOfPokemons());
-//    });
+  group('Fetching next lists of pokemons', () {
+    final PokemonNameListEntity pokemonNameListEntity = pokemonNameList;
+    test("Should emit a new listing state", () {
+      when(mockGetPokemonList(Params(url: firstListURL)))
+          .thenAnswer((_) async => pokemonNameListEntity);
+
+      final expected = [
+        EmptyState(),
+        Listing(
+          pokemonNameList: pokemonNameListEntity,
+          url: lastListURL,
+        ),
+      ];
+
+      expectLater(bloc, emitsInOrder(expected));
+
+      bloc.add(GetPagedListOfPokemons(url: firstListURL));
+    });
+
+    test("Should emit a Loaded state", () {
+      final PokemonNameListEntity lastPokemonNameListEntity =
+          PokemonNameListEntity(null, 964, [item]);
+
+      when(mockGetPokemonList(Params(url: lastListURL)))
+          .thenAnswer((_) async => lastPokemonNameListEntity);
+
+      final expected = [
+        EmptyState(),
+        Loaded(pokemonNameList: lastPokemonNameListEntity),
+      ];
+
+      expectLater(bloc, emitsInOrder(expected));
+
+      bloc.add(GetPagedListOfPokemons(url: lastListURL));
+    });
   });
 }

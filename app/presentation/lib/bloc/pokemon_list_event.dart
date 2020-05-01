@@ -5,15 +5,14 @@ abstract class PokemonlistEvent extends Equatable {
 }
 
 class GetPagedListOfPokemons extends PokemonlistEvent {
-  final String url;
-
   const GetPagedListOfPokemons({@required this.url});
+  final String url;
 
   @override
   List<Object> get props => [url];
 }
 
-class GetFirstPageListOfPokemons extends PokemonlistEvent {
+class GetFirstPageListOfPokemons extends GetPagedListOfPokemons {
   final String url = 'https://pokeapi.co/api/v2/pokemon/?offset=0&limit=20';
 
   GetFirstPageListOfPokemons();
