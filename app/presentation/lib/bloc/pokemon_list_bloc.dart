@@ -26,31 +26,38 @@ class PokemonlistBloc extends Bloc<PokemonlistEvent, PokemonlistState> {
   Stream<PokemonlistState> mapEventToState(
     PokemonlistEvent event,
   ) async* {
-    if (event is GetFirstPageListOfPokemons) {
-      yield Loading();
-      try {
-        yield await listPokemons(event);
-      } catch (e) {
-        yield ErrorState(url: event.url, error: "erro");
-      }
-    } else if (event is GetPagedListOfPokemons) {
-      try {
-        if (event.url != null) {
-          yield await listPokemons(event);
-        }
-      } catch (e) {
-        yield ErrorState(url: event.url, error: "erro");
-      }
-    }
-  }
+    PokemonNameListEntity updatedPokemonList;
 
-  Future<PokemonlistState> listPokemons(PokemonlistEvent event) async {
-    final PokemonNameListEntity pokemonList = await getPokemonList(
-        Params(url: (event as GetPagedListOfPokemons).url));
-    if (pokemonList.next != null) {
-      return Listing(pokemonNameList: pokemonList, url: pokemonList.next);
-    } else {
-      return Loaded(pokemonNameList: pokemonList);
+    try {
+      if (event is GetFirstPageListOfPokemons) {
+        final PokemonNameListEntity pokemonList =
+            await getPokemonList(Params(url: event.url));
+        yield Loading();
+        yield Listing(pokemonNameList: pokemonList, url: pokemonList.next);
+      } else if (event is GetPagedListOfPokemons) {
+        final PokemonNameListEntity pokemonList =
+            await getPokemonList(Params(url: event.url));
+        updatedPokemonList = PokemonNameListEntity(
+          pokemonList.next,
+          pokemonList.count,
+          event.currentPokemonNameList,
+        );
+        updatedPokemonList.results.addAll(pokemonList.results);
+
+        if (pokemonList.next != null) {
+          yield Listing(
+            pokemonNameList: updatedPokemonList,
+            url: pokemonList.next,
+          );
+        } else {
+          yield Loaded(pokemonNameList: updatedPokemonList);
+        }
+      }
+    } catch (e) {
+      yield ErrorState(
+        url: (event as GetPagedListOfPokemons).url,
+        error: "erro",
+      );
     }
   }
 }

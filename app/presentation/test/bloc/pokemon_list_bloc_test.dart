@@ -23,6 +23,9 @@ void main() {
   final PokemonNameListEntity pokemonNameList =
       PokemonNameListEntity(lastListURL, 964, [item]);
 
+  final PokemonNameListEntity lastPokemonNameListEntity =
+      PokemonNameListEntity(null, 964, [item]);
+
   setUp(() {
     mockGetPokemonList = MockGetPokemonList();
     bloc = PokemonlistBloc(getList: mockGetPokemonList);
@@ -71,7 +74,6 @@ void main() {
 
       final expected = [
         EmptyState(),
-        Loading(),
         ErrorState(url: firstListURL, error: "erro"),
       ];
 
@@ -97,13 +99,12 @@ void main() {
 
       expectLater(bloc, emitsInOrder(expected));
 
-      bloc.add(GetPagedListOfPokemons(url: firstListURL));
+      bloc.add(
+        GetPagedListOfPokemons(url: firstListURL, currentPokemonNameList: []),
+      );
     });
 
     test("Should emit a Loaded state", () {
-      final PokemonNameListEntity lastPokemonNameListEntity =
-          PokemonNameListEntity(null, 964, [item]);
-
       when(mockGetPokemonList(Params(url: lastListURL)))
           .thenAnswer((_) async => lastPokemonNameListEntity);
 
@@ -114,7 +115,36 @@ void main() {
 
       expectLater(bloc, emitsInOrder(expected));
 
-      bloc.add(GetPagedListOfPokemons(url: lastListURL));
+      bloc.add(
+        GetPagedListOfPokemons(
+          url: lastListURL,
+          currentPokemonNameList: [],
+        ),
+      );
+    });
+
+    test('Should concatenate with previous list', () {
+      when(mockGetPokemonList(Params(url: lastListURL)))
+          .thenAnswer((_) async => lastPokemonNameListEntity);
+
+      final PokemonNameListEntity concatenatedNameListEntity = pokemonNameList;
+      concatenatedNameListEntity.results.addAll(
+        lastPokemonNameListEntity.results,
+      );
+
+      final expected = [
+        EmptyState(),
+        Loaded(pokemonNameList: concatenatedNameListEntity),
+      ];
+
+      expectLater(bloc, emitsInOrder(expected));
+
+      bloc.add(
+        GetPagedListOfPokemons(
+          url: lastListURL,
+          currentPokemonNameList: pokemonNameList.results,
+        ),
+      );
     });
   });
 }

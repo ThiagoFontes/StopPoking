@@ -5,11 +5,13 @@ abstract class PokemonlistEvent extends Equatable {
 }
 
 class GetPagedListOfPokemons extends PokemonlistEvent {
-  const GetPagedListOfPokemons({@required this.url});
+  const GetPagedListOfPokemons(
+      {@required this.url, @required this.currentPokemonNameList});
   final String url;
+  final List<PokemonNameItemEntity> currentPokemonNameList;
 
   @override
-  List<Object> get props => [url];
+  List<Object> get props => [url, currentPokemonNameList];
 }
 
 class GetFirstPageListOfPokemons extends GetPagedListOfPokemons {
