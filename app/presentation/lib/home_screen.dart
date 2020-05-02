@@ -20,16 +20,43 @@ class MyHomePage extends StatelessWidget {
       ),
       body: BlocProvider(
         create: (_) => sl,
-        child: PokemonListWidget(),
+        child: HomeContentWidget(),
       ),
     );
   }
 }
 
-class PokemonListWidget extends StatelessWidget {
-  const PokemonListWidget({
+class HomeContentWidget extends StatefulWidget {
+  const HomeContentWidget({
     Key key,
   }) : super(key: key);
+
+  @override
+  _HomeContentWidgetState createState() => _HomeContentWidgetState();
+}
+
+class _HomeContentWidgetState extends State<HomeContentWidget> {
+  final ScrollController _scrollController = ScrollController();
+  String url;
+  List<PokemonNameItemEntity> currentPokemonNameList;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  bool _handleScrollNotification(ScrollNotification notification) {
+    if (notification is ScrollEndNotification &&
+        _scrollController.position.extentAfter == 0) {
+      BlocProvider.of<PokemonlistBloc>(context).add(
+        GetPagedListOfPokemons(
+          url: url,
+          currentPokemonNameList: currentPokemonNameList,
+        ),
+      );
+    }
+    return false;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,53 +74,78 @@ class PokemonListWidget extends StatelessWidget {
           );
         }
         if (state is Listing) {
-          BlocProvider.of<PokemonlistBloc>(context).add(
-            GetPagedListOfPokemons(
-              url: state.url,
-              currentPokemonNameList: state.pokemonNameList.results,
-            ),
+          url = state.url;
+          currentPokemonNameList = state.pokemonNameList.results;
+
+          return PokemonListWidget(
+            scrollController: _scrollController,
+            handleScrollNotification: _handleScrollNotification,
+            list: state.pokemonNameList.results,
           );
-          return construirLista(state.pokemonNameList.results);
         }
         if (state is Loaded) {
-          return construirLista(state.pokemonNameList.results);
+          return PokemonListWidget(
+            scrollController: _scrollController,
+            handleScrollNotification: _handleScrollNotification,
+            list: state.pokemonNameList.results,
+          );
         }
 
         return Container();
       },
     );
   }
+}
 
-  ListView construirLista(List<PokemonNameItemEntity> list) {
-    return ListView.builder(
-      physics: BouncingScrollPhysics(),
-      itemCount: list.length,
-      itemBuilder: (context, i) {
-        return Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Container(
-            width: double.infinity,
-            height: 20,
-            child: Row(
-              children: <Widget>[
-                Container(
-                  width: 50,
-                  child: Text(
-                    (i + 1).toString(),
-                    textAlign: TextAlign.center,
+class PokemonListWidget extends StatelessWidget {
+  const PokemonListWidget({
+    Key key,
+    @required ScrollController scrollController,
+    @required Function handleScrollNotification,
+    @required this.list,
+  })  : _scrollController = scrollController,
+        _handleScrollNotification = handleScrollNotification,
+        super(key: key);
+
+  final ScrollController _scrollController;
+  final List<PokemonNameItemEntity> list;
+  final Function _handleScrollNotification;
+
+  @override
+  Widget build(BuildContext context) {
+    return NotificationListener<ScrollNotification>(
+      onNotification: _handleScrollNotification,
+      child: ListView.builder(
+        physics: BouncingScrollPhysics(),
+        controller: _scrollController,
+        itemCount: list.length,
+        itemBuilder: (context, i) {
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              width: double.infinity,
+              height: 20,
+              child: Row(
+                children: <Widget>[
+                  Container(
+                    width: 50,
+                    child: Text(
+                      (i + 1).toString(),
+                      textAlign: TextAlign.center,
+                    ),
                   ),
-                ),
-                VerticalDivider(
-                  color: Colors.grey,
-                ),
-                Expanded(
-                  child: Text(list[i].name),
-                ),
-              ],
+                  VerticalDivider(
+                    color: Colors.grey,
+                  ),
+                  Expanded(
+                    child: Text(list[i].name),
+                  ),
+                ],
+              ),
             ),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }

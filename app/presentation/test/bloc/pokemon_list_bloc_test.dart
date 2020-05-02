@@ -15,6 +15,9 @@ void main() {
       name: "togedemaru-totem",
       url: "https://pokeapi.co/api/v2/pokemon/10154/");
 
+  PokemonNameItemEntity item2 = PokemonNameItemEntity(
+      name: "poke2", url: "https://pokeapi.co/api/v2/pokemon/10155/");
+
   final String firstListURL =
       'https://pokeapi.co/api/v2/pokemon/?offset=0&limit=20';
   final String lastListURL =
@@ -24,7 +27,7 @@ void main() {
       PokemonNameListEntity(lastListURL, 964, [item]);
 
   final PokemonNameListEntity lastPokemonNameListEntity =
-      PokemonNameListEntity(null, 964, [item]);
+      PokemonNameListEntity(null, 964, [item2]);
 
   setUp(() {
     mockGetPokemonList = MockGetPokemonList();
@@ -124,18 +127,16 @@ void main() {
       );
     });
 
-    test('Should concatenate with previous list', () {
+    test('Should not concatenate if the same list is returned', () {
       when(mockGetPokemonList(Params(url: lastListURL)))
-          .thenAnswer((_) async => lastPokemonNameListEntity);
-
-      final PokemonNameListEntity concatenatedNameListEntity = pokemonNameList;
-      concatenatedNameListEntity.results.addAll(
-        lastPokemonNameListEntity.results,
-      );
+          .thenAnswer((_) async => pokemonNameList);
 
       final expected = [
         EmptyState(),
-        Loaded(pokemonNameList: concatenatedNameListEntity),
+        Listing(
+          pokemonNameList: pokemonNameList,
+          url: lastListURL,
+        ),
       ];
 
       expectLater(bloc, emitsInOrder(expected));
@@ -144,6 +145,33 @@ void main() {
         GetPagedListOfPokemons(
           url: lastListURL,
           currentPokemonNameList: pokemonNameList.results,
+        ),
+      );
+    });
+
+    test('Should concatenate responses when received', () {
+      when(mockGetPokemonList(Params(url: lastListURL)))
+          .thenAnswer((_) async => lastPokemonNameListEntity);
+
+      final PokemonNameListEntity concatenatedList = PokemonNameListEntity(
+        lastPokemonNameListEntity.next,
+        lastPokemonNameListEntity.count,
+        pokemonNameList.results,
+      );
+
+      concatenatedList.results.addAll(lastPokemonNameListEntity.results);
+
+      final expected = [
+        EmptyState(),
+        Loaded(pokemonNameList: concatenatedList),
+      ];
+
+      expectLater(bloc, emitsInOrder(expected));
+
+      bloc.add(
+        GetPagedListOfPokemons(
+          currentPokemonNameList: pokemonNameList.results,
+          url: lastListURL,
         ),
       );
     });

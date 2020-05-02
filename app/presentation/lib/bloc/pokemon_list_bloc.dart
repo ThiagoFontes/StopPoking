@@ -44,7 +44,12 @@ class PokemonlistBloc extends Bloc<PokemonlistEvent, PokemonlistState> {
           pokemonList.count,
           event.currentPokemonNameList,
         );
-        updatedPokemonList.results.addAll(pokemonList.results);
+        //Checking if it was previously added
+        bool wasAdded =
+            updatedPokemonList.results.contains(pokemonList.results[0]);
+        if (!wasAdded) {
+          updatedPokemonList.results.addAll(pokemonList.results);
+        }
 
         if (pokemonList.next != null) {
           yield Listing(

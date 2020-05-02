@@ -7,4 +7,7 @@ class PokemonNameItemEntity extends Response {
 
   PokemonNameItemEntity({@required this.name, @required this.url})
       : super([name, url]);
+
+  @override
+  List<Object> get props => [name, url];
 }

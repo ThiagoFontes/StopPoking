@@ -7,4 +7,7 @@ class PokemonNameListEntity extends Response {
   final List<PokemonNameItemEntity> results;
 
   PokemonNameListEntity(this.next, this.count, this.results) : super(results);
+
+  @override
+  List<Object> get props => [next, count, results];
 }
