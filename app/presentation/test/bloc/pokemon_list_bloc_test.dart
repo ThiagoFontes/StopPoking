@@ -95,6 +95,7 @@ void main() {
 
       final expected = [
         EmptyState(),
+        Loading(),
         Listing(
           pokemonNameList: pokemonNameListEntity,
           url: lastListURL,
@@ -114,6 +115,7 @@ void main() {
 
       final expected = [
         EmptyState(),
+        Loading(),
         Loaded(pokemonNameList: lastPokemonNameListEntity),
       ];
 
@@ -133,6 +135,7 @@ void main() {
 
       final expected = [
         EmptyState(),
+        Loading(),
         Listing(
           pokemonNameList: pokemonNameList,
           url: lastListURL,
@@ -163,6 +166,7 @@ void main() {
 
       final expected = [
         EmptyState(),
+        Loading(),
         Loaded(pokemonNameList: concatenatedList),
       ];
 
