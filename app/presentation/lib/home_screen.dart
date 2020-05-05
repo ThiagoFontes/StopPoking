@@ -47,7 +47,7 @@ class _HomeContentWidgetState extends State<HomeContentWidget> {
 
   bool _handleScrollNotification(ScrollNotification notification) {
     if (notification is ScrollEndNotification &&
-        _scrollController.position.extentAfter == 0) {
+        _scrollController.position.extentAfter <= 18 * 4) {
       BlocProvider.of<PokemonlistBloc>(context).add(
         GetPagedListOfPokemons(
           url: url,
@@ -69,8 +69,11 @@ class _HomeContentWidgetState extends State<HomeContentWidget> {
           return Container();
         }
         if (state is Loading) {
-          return Center(
-            child: CircularProgressIndicator(),
+          return PokemonListWidget(
+            scrollController: _scrollController,
+            handleScrollNotification: _handleScrollNotification,
+            list: state.currentPokemonList,
+            isLoading: true,
           );
         }
         if (state is Listing) {
@@ -81,6 +84,7 @@ class _HomeContentWidgetState extends State<HomeContentWidget> {
             scrollController: _scrollController,
             handleScrollNotification: _handleScrollNotification,
             list: state.pokemonNameList.results,
+            isLoading: true,
           );
         }
         if (state is Loaded) {
@@ -88,6 +92,7 @@ class _HomeContentWidgetState extends State<HomeContentWidget> {
             scrollController: _scrollController,
             handleScrollNotification: _handleScrollNotification,
             list: state.pokemonNameList.results,
+            isLoading: false,
           );
         }
 
@@ -103,6 +108,7 @@ class PokemonListWidget extends StatelessWidget {
     @required ScrollController scrollController,
     @required Function handleScrollNotification,
     @required this.list,
+    this.isLoading,
   })  : _scrollController = scrollController,
         _handleScrollNotification = handleScrollNotification,
         super(key: key);
@@ -110,6 +116,7 @@ class PokemonListWidget extends StatelessWidget {
   final ScrollController _scrollController;
   final List<PokemonNameItemEntity> list;
   final Function _handleScrollNotification;
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
@@ -118,32 +125,41 @@ class PokemonListWidget extends StatelessWidget {
       child: ListView.builder(
         physics: BouncingScrollPhysics(),
         controller: _scrollController,
-        itemCount: list.length,
+        itemCount: isLoading ? list.length + 1 : list.length,
         itemBuilder: (context, i) {
-          return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              width: double.infinity,
-              height: 20,
-              child: Row(
-                children: <Widget>[
-                  Container(
-                    width: 50,
-                    child: Text(
-                      (i + 1).toString(),
-                      textAlign: TextAlign.center,
+          if (i < list.length) {
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                width: double.infinity,
+                height: 20,
+                child: Row(
+                  children: <Widget>[
+                    Container(
+                      width: 50,
+                      child: Text(
+                        (i + 1).toString(),
+                        textAlign: TextAlign.center,
+                      ),
                     ),
-                  ),
-                  VerticalDivider(
-                    color: Colors.grey,
-                  ),
-                  Expanded(
-                    child: Text(list[i].name),
-                  ),
-                ],
+                    VerticalDivider(
+                      color: Colors.grey,
+                    ),
+                    Expanded(
+                      child: Text(list[i].name),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          );
+            );
+          } else {
+            return Center(
+              child: Padding(
+                padding: const EdgeInsets.all(18.0),
+                child: CircularProgressIndicator(),
+              ),
+            );
+          }
         },
       ),
     );

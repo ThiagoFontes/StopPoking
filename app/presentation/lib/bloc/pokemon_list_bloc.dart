@@ -30,14 +30,14 @@ class PokemonlistBloc extends Bloc<PokemonlistEvent, PokemonlistState> {
 
     try {
       if (event is GetFirstPageListOfPokemons) {
-        yield Loading();
+        yield Loading(currentPokemonList: []);
 
         final PokemonNameListEntity pokemonList =
             await getPokemonList(Params(url: event.url));
 
         yield Listing(pokemonNameList: pokemonList, url: pokemonList.next);
       } else if (event is GetPagedListOfPokemons) {
-        yield Loading();
+        yield Loading(currentPokemonList: event.currentPokemonNameList);
         final PokemonNameListEntity pokemonList =
             await getPokemonList(Params(url: event.url));
         updatedPokemonList = PokemonNameListEntity(

@@ -10,8 +10,12 @@ class EmptyState extends PokemonlistState {
 }
 
 class Loading extends PokemonlistState {
+  final List<PokemonNameItemEntity> currentPokemonList;
+
+  Loading({@required this.currentPokemonList});
+
   @override
-  List<Object> get props => null;
+  List<Object> get props => [currentPokemonList];
 }
 
 class Listing extends PokemonlistState {

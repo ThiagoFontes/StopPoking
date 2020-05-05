@@ -29,6 +29,8 @@ void main() {
   final PokemonNameListEntity lastPokemonNameListEntity =
       PokemonNameListEntity(null, 964, [item2]);
 
+  final List<PokemonNameItemEntity> emptyList = [];
+
   setUp(() {
     mockGetPokemonList = MockGetPokemonList();
     bloc = PokemonlistBloc(getList: mockGetPokemonList);
@@ -59,7 +61,7 @@ void main() {
 
       final expected = [
         EmptyState(),
-        Loading(),
+        Loading(currentPokemonList: []),
         Listing(
             pokemonNameList: pokemonNameListEntity,
             url: pokemonNameListEntity.next),
@@ -77,7 +79,7 @@ void main() {
 
       final expected = [
         EmptyState(),
-        Loading(),
+        Loading(currentPokemonList: []),
         ErrorState(url: firstListURL, error: "erro"),
       ];
 
@@ -95,7 +97,7 @@ void main() {
 
       final expected = [
         EmptyState(),
-        Loading(),
+        Loading(currentPokemonList: emptyList),
         Listing(
           pokemonNameList: pokemonNameListEntity,
           url: lastListURL,
@@ -105,7 +107,10 @@ void main() {
       expectLater(bloc, emitsInOrder(expected));
 
       bloc.add(
-        GetPagedListOfPokemons(url: firstListURL, currentPokemonNameList: []),
+        GetPagedListOfPokemons(
+          url: firstListURL,
+          currentPokemonNameList: emptyList,
+        ),
       );
     });
 
@@ -115,7 +120,7 @@ void main() {
 
       final expected = [
         EmptyState(),
-        Loading(),
+        Loading(currentPokemonList: lastPokemonNameListEntity.results),
         Loaded(pokemonNameList: lastPokemonNameListEntity),
       ];
 
@@ -135,7 +140,7 @@ void main() {
 
       final expected = [
         EmptyState(),
-        Loading(),
+        Loading(currentPokemonList: pokemonNameList.results),
         Listing(
           pokemonNameList: pokemonNameList,
           url: lastListURL,
@@ -166,7 +171,7 @@ void main() {
 
       final expected = [
         EmptyState(),
-        Loading(),
+        Loading(currentPokemonList: pokemonNameList.results),
         Loaded(pokemonNameList: concatenatedList),
       ];
 
