@@ -1,6 +1,7 @@
 import 'package:domain/entities.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:presentation/widgets/pokemon_item_list_widget.dart';
 import 'bloc/pokemon_list_bloc.dart';
 
 class MyHomePage extends StatelessWidget {
@@ -130,26 +131,9 @@ class PokemonListWidget extends StatelessWidget {
           if (i < list.length) {
             return Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Container(
-                width: double.infinity,
-                height: 20,
-                child: Row(
-                  children: <Widget>[
-                    Container(
-                      width: 50,
-                      child: Text(
-                        (i + 1).toString(),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                    VerticalDivider(
-                      color: Colors.grey,
-                    ),
-                    Expanded(
-                      child: Text(list[i].name),
-                    ),
-                  ],
-                ),
+              child: PokemonItemWidget(
+                name: list[i].name,
+                pokedexNumber: i + 1,
               ),
             );
           } else {
