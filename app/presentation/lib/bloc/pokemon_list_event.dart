@@ -15,7 +15,7 @@ class GetPagedListOfPokemons extends PokemonlistEvent {
 }
 
 class GetFirstPageListOfPokemons extends GetPagedListOfPokemons {
-  final String url = 'https://pokeapi.co/api/v2/pokemon/?offset=0&limit=20';
+  final String url = 'https://pokeapi.co/api/v2/pokemon/?offset=0&limit=40';
 
   GetFirstPageListOfPokemons();
 

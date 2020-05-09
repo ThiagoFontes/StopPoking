@@ -35,7 +35,6 @@ Future<void> setupLocator() async {
   );
 
   //! Core
-  //TODO: make networkInfo abstract
   sl.registerLazySingleton(() => NetworkInfo(dataConnectionChecker: sl()));
 
   //! External

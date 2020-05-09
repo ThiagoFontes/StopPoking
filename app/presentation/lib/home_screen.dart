@@ -48,7 +48,7 @@ class _HomeContentWidgetState extends State<HomeContentWidget> {
 
   bool _handleScrollNotification(ScrollNotification notification) {
     if (notification is ScrollEndNotification &&
-        _scrollController.position.extentAfter <= 18 * 4) {
+        _scrollController.position.extentAfter <= 500) {
       BlocProvider.of<PokemonlistBloc>(context).add(
         GetPagedListOfPokemons(
           url: url,
