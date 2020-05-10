@@ -1,3 +1,4 @@
+import 'package:core/exception.dart';
 import 'package:core/network/network_info.dart';
 import 'package:data/datasources/pokeapi_pokemons.dart';
 import 'package:domain/entities/pokemon.dart';
@@ -31,7 +32,7 @@ class PokemonRepository implements PokemonRepositoryContract {
     if (await networkInfo.isConnected) {
       return pokemonsRemoteDataSource.getPokemonList(url);
     } else {
-      return null;
+      throw NetworkException(message: "No internet connection");
     }
   }
 }

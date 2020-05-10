@@ -40,8 +40,13 @@ class Loaded extends PokemonlistState {
 class ErrorState extends PokemonlistState {
   final String error;
   final String url;
+  final List<PokemonNameItemEntity> pokemonNameList;
 
-  ErrorState({@required this.error, @required this.url});
+  ErrorState({
+    @required this.error,
+    @required this.url,
+    @required this.pokemonNameList,
+  });
 
   @override
   List<Object> get props => [error, url];

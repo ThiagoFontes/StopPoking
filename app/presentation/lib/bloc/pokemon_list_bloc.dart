@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:domain/entities.dart';
 import 'package:domain/usecases.dart';
+import 'package:core/exception.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
@@ -28,16 +29,26 @@ class PokemonlistBloc extends Bloc<PokemonlistEvent, PokemonlistState> {
   ) async* {
     PokemonNameListEntity updatedPokemonList;
 
-    try {
-      if (event is GetFirstPageListOfPokemons) {
-        yield Loading(currentPokemonList: []);
+    if (event is GetFirstPageListOfPokemons) {
+      yield Loading(currentPokemonList: []);
 
-        final PokemonNameListEntity pokemonList =
-            await getPokemonList(Params(url: event.url));
+      try {
+        final PokemonNameListEntity pokemonList = await getPokemonList(
+          Params(
+            url: event.url,
+          ),
+        );
 
-        yield Listing(pokemonNameList: pokemonList, url: pokemonList.next);
-      } else if (event is GetPagedListOfPokemons) {
-        yield Loading(currentPokemonList: event.currentPokemonNameList);
+        yield Listing(
+          pokemonNameList: pokemonList,
+          url: pokemonList.next,
+        );
+      } catch (e) {
+        yield _emitErrorState(e, [], event.url);
+      }
+    } else if (event is GetPagedListOfPokemons) {
+      yield Loading(currentPokemonList: event.currentPokemonNameList);
+      try {
         final PokemonNameListEntity pokemonList =
             await getPokemonList(Params(url: event.url));
         updatedPokemonList = PokemonNameListEntity(
@@ -45,9 +56,11 @@ class PokemonlistBloc extends Bloc<PokemonlistEvent, PokemonlistState> {
           pokemonList.count,
           event.currentPokemonNameList,
         );
+
         //Checking if it was previously added
-        bool wasAdded =
-            updatedPokemonList.results.contains(pokemonList.results[0]);
+        bool wasAdded = updatedPokemonList.results.contains(
+          pokemonList.results[0],
+        );
         if (!wasAdded) {
           updatedPokemonList.results.addAll(pokemonList.results);
         }
@@ -60,12 +73,25 @@ class PokemonlistBloc extends Bloc<PokemonlistEvent, PokemonlistState> {
         } else {
           yield Loaded(pokemonNameList: updatedPokemonList);
         }
+      } catch (e) {
+        yield _emitErrorState(e, event.currentPokemonNameList, event.url);
       }
-    } catch (e) {
-      yield ErrorState(
-        url: (event as GetPagedListOfPokemons).url,
-        error: "erro",
-      );
     }
+  }
+
+  ErrorState _emitErrorState(
+    e,
+    List<PokemonNameItemEntity> currentList,
+    String nextUrl,
+  ) {
+    String errorMessage;
+    if (e is NetworkException) {
+      errorMessage = e.message;
+    }
+    return ErrorState(
+      url: nextUrl != null ? nextUrl : GetFirstPageListOfPokemons().url,
+      error: errorMessage != null ? errorMessage : "erro",
+      pokemonNameList: currentList != null ? currentList : [],
+    );
   }
 }

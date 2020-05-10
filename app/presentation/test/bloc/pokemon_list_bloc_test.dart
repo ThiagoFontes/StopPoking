@@ -19,9 +19,9 @@ void main() {
       name: "poke2", url: "https://pokeapi.co/api/v2/pokemon/10155/");
 
   final String firstListURL =
-      'https://pokeapi.co/api/v2/pokemon/?offset=0&limit=20';
+      'https://pokeapi.co/api/v2/pokemon/?offset=0&limit=40';
   final String lastListURL =
-      'https://pokeapi.co/api/v2/pokemon/?offset=640&limit=20';
+      'https://pokeapi.co/api/v2/pokemon/?offset=640&limit=40';
 
   final PokemonNameListEntity pokemonNameList =
       PokemonNameListEntity(lastListURL, 964, [item]);
@@ -52,7 +52,7 @@ void main() {
       bloc.add(GetFirstPageListOfPokemons());
       await untilCalled(mockGetPokemonList(any));
 
-      verify(mockGetPokemonList(Params(url: firstListURL)));
+      verify(mockGetPokemonList(Params(url: firstListURL))).called(1);
     });
 
     test("Should emit empty state, loading and First list retrieved", () {
@@ -80,7 +80,11 @@ void main() {
       final expected = [
         EmptyState(),
         Loading(currentPokemonList: []),
-        ErrorState(url: firstListURL, error: "erro"),
+        ErrorState(
+          url: firstListURL,
+          pokemonNameList: [],
+          error: "erro",
+        ),
       ];
 
       expectLater(bloc, emitsInOrder(expected));
