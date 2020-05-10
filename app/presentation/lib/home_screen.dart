@@ -1,8 +1,9 @@
 import 'package:domain/entities.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:presentation/widgets/pokemon_item_list_widget.dart';
 import 'bloc/pokemon_list_bloc.dart';
+import 'widgets/pokemon_list_widget.dart';
+import 'widgets/show_error_widget.dart';
 
 class MyHomePage extends StatelessWidget {
   MyHomePage({Key key, this.title, this.sl}) : super(key: key);
@@ -121,7 +122,7 @@ class _HomeContentWidgetState extends State<HomeContentWidget> {
             scrollController: _scrollController,
             handleScrollNotification: _handleScrollNotification,
             list: state.pokemonNameList,
-            extraWidget: ErrorWidget(
+            extraWidget: ShowErrorWidget(
               message: state.error,
               icon: Icons.signal_wifi_off,
               retryFunction: _retry,
@@ -138,98 +139,5 @@ class _HomeContentWidgetState extends State<HomeContentWidget> {
       {String newUrl, List<PokemonNameItemEntity> newPokemonNameList}) {
     url = newUrl;
     currentPokemonNameList = newPokemonNameList;
-  }
-}
-
-class PokemonListWidget extends StatelessWidget {
-  const PokemonListWidget(
-      {Key key,
-      @required ScrollController scrollController,
-      @required Function handleScrollNotification,
-      @required this.list,
-      this.extraWidget})
-      : _scrollController = scrollController,
-        _handleScrollNotification = handleScrollNotification,
-        super(key: key);
-
-  final ScrollController _scrollController;
-  final List<PokemonNameItemEntity> list;
-  final Function _handleScrollNotification;
-  final Widget extraWidget;
-
-  @override
-  Widget build(BuildContext context) {
-    return NotificationListener<ScrollNotification>(
-      onNotification: _handleScrollNotification,
-      child: ListView.builder(
-        physics: BouncingScrollPhysics(),
-        controller: _scrollController,
-        itemCount: extraWidget != null ? list.length + 1 : list.length,
-        itemBuilder: (context, i) {
-          if (i < list.length) {
-            return Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: PokemonItemWidget(
-                name: list[i].name,
-                pokedexNumber: i + 1,
-              ),
-            );
-          } else {
-            return extraWidget;
-          }
-        },
-      ),
-    );
-  }
-}
-
-class LoadingWidget extends StatelessWidget {
-  const LoadingWidget({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(18.0),
-        child: CircularProgressIndicator(),
-      ),
-    );
-  }
-}
-
-class ErrorWidget extends StatelessWidget {
-  const ErrorWidget({Key key, @required message, @required retryFunction, icon})
-      : _message = message,
-        _retryFunction = retryFunction,
-        _icon = icon,
-        super(key: key);
-
-  final String _message;
-  final Function _retryFunction;
-  final IconData _icon;
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: _retryFunction,
-      child: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(28.0),
-          child: Column(
-            children: <Widget>[
-              Icon(
-                _icon != null ? _icon : Icons.error_outline,
-                color: Colors.red[200],
-                size: 50,
-              ),
-              Text(_message),
-              Text('Retry?'),
-            ],
-          ),
-        ),
-      ),
-    );
   }
 }
