@@ -34,12 +34,12 @@ jobs:
         
     - name: Run data test
       run: |
-        cd ../data
+        cd app/data
         flutter pub get
         flutter pub test
         
     - name: Run presentation test
       run: |
-        cd ../presentation
+        cd app/presentation
         flutter pub get
         flutter test
