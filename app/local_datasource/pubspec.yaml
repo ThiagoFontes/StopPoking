@@ -1,5 +1,5 @@
-name: local_database
-description: Local database module
+name: local_datasource
+description: Local datasource module
 
 version: 1.0.0+1
 

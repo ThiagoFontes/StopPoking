@@ -1,4 +1,4 @@
-# local_database
+# local_datasource
 
 A new flutter module project.
 
