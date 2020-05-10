@@ -6,13 +6,7 @@ import 'package:http/http.dart' as http;
 import 'package:meta/meta.dart';
 import 'package:core/exception.dart';
 
-abstract class PokemonsRemoteDataSourceContract {
-  Future<PokemonNamesList> getPokemonList(String url);
-
-  Future<PokemonModel> getPokemonById(int id);
-
-  Future<PokemonModel> getPokemonByName(String name);
-}
+import 'datasources_contracts.dart';
 
 class PokemonsRemoteDataSource implements PokemonsRemoteDataSourceContract {
   final http.Client client;

@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:core/network/network_info.dart';
-import 'package:data/datasources/pokeapi_pokemons.dart';
+import 'package:data/datasources/datasources_contracts.dart';
 import 'package:data/model/pokemon_name_list.dart';
 import 'package:data/repository/pokemon_repository.dart';
 import 'package:data_connection_checker/data_connection_checker.dart';

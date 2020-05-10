@@ -1,6 +1,6 @@
 import 'package:core/exception.dart';
 import 'package:core/network/network_info.dart';
-import 'package:data/datasources/pokeapi_pokemons.dart';
+import 'package:data/datasources/datasources_contracts.dart';
 import 'package:domain/entities/pokemon.dart';
 import 'package:domain/entities/pokemon_name_list/pokemon_name_list.dart';
 import 'package:domain/repositories.dart';
