@@ -29,14 +29,17 @@ jobs:
     - name: Run domain test
       run: |
         cd app/domain
+        flutter pub get
         flutter pub test
         
     - name: Run data test
       run: |
         cd ../data
+        flutter pub get
         flutter pub test
         
     - name: Run presentation test
       run: |
         cd ../presentation
+        flutter pub get
         flutter test
