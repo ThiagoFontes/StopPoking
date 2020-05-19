@@ -1,11 +1,14 @@
 # StopPoking
-Your pokedex app
+
+![Flutter tests runner](https://github.com/ThiagoFontes/StopPoking/workflows/Flutter%20tests%20runner/badge.svg?branch=master)
+
+A pokedex app
 
 ### Please enable semantic commits running the following commands:
-`chmod +x hooks/commit-msg`
-
-`git config core.hooksPath hooks`
-
+```
+chmod +x hooks/commit-msg
+git config core.hooksPath hooks
+````
 ### To run tests
 Each module has its own dependencies and data and domain layers doesnt depends on Flutter, therefore their tests run dart test package. You can see how to run tests in each package below.
 ```
